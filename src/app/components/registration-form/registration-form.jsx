@@ -2,9 +2,16 @@ import React from 'react';
 import getClass from '../../utils/getClass';
 
 class RegistrationForm extends React.Component {
+    submit = (e) => {
+        const { setPage } = this.props;
+
+        e.preventDefault();
+        setPage('map-page');
+    }
+
     render() {
         return (
-            <form className={getClass("registration-form form", this.props)}>
+            <form onSubmit={this.submit} className={getClass("registration-form form", this.props)}>
                 <div className="form__body">
                     <div className="form__row">
                         <div className="form__col">

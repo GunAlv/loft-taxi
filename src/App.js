@@ -9,16 +9,20 @@ class App extends React.Component {
         page: 'welcome-page',
     };
 
+    setPage = (page) => {
+        this.setState({ page });
+    };
+
     render() {
         const { page } = this.state;
 
         return (
             <div className="container">
-                <Header/>
+                <Header setPage={this.setPage}/>
                 <main className="main">
                     {
                         {
-                            'welcome-page': <WelcomePage/>,
+                            'welcome-page': <WelcomePage setPage={this.setPage}/>,
                             'map-page': <MapPage/>,
                             'profile-page': <ProfilePage/>
                         }[page]
