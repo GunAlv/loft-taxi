@@ -16,17 +16,17 @@ class App extends React.Component {
     render() {
         const { page } = this.state;
 
+        const PAGES = {
+            'welcome-page': <WelcomePage onChangePage={this.setPage}/>,
+            'map-page': <MapPage/>,
+            'profile-page': <ProfilePage/>,
+        };
+
         return (
             <div className="container">
-                <Header setPage={this.setPage}/>
+                <Header onChangePage={this.setPage}/>
                 <main className="main">
-                    {
-                        {
-                            'welcome-page': <WelcomePage setPage={this.setPage}/>,
-                            'map-page': <MapPage/>,
-                            'profile-page': <ProfilePage/>
-                        }[page]
-                    }
+                    { PAGES[page] }
                 </main>
             </div>
         );

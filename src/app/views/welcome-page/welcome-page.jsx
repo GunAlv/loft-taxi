@@ -8,7 +8,7 @@ import RegistrationForm from '../../components/registration-form';
 
 class WelcomePage extends React.Component {
     render() {
-        const { isLogin, setPage } = this.props;
+        const { isLogin, onChangePage } = this.props;
 
         return (
             <section className={getClass("welcome-page", this.props)}>
@@ -17,9 +17,9 @@ class WelcomePage extends React.Component {
                     <StepForm mods="welcome-page__step-form">
                         {
                             isLogin ? (
-                                <LoginForm setPage={setPage}/>
+                                <LoginForm onChangePage={onChangePage}/>
                             ) : (
-                                <RegistrationForm setPage={setPage}/>
+                                <RegistrationForm onChangePage={onChangePage}/>
                             )
                         }
                     </StepForm>

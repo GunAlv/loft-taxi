@@ -3,10 +3,10 @@ import getClass from '../../utils/getClass';
 
 class LoginForm extends React.Component {
     submit = (e) => {
-        const { setPage } = this.props;
+        const { onChangePage } = this.props;
 
         e.preventDefault();
-        setPage('map-page');
+        onChangePage('map-page');
     }
 
     render() {

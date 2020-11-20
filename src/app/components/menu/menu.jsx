@@ -2,7 +2,7 @@ import React from 'react';
 import getClass from '../../utils/getClass';
 
 const Menu = (props) => {
-    const { setPage } = props;
+    const { onChangePage } = props;
 
     return (
         <nav className={getClass("menu", props)}>
@@ -13,7 +13,7 @@ const Menu = (props) => {
                             className="menu__link"
                             type="button"
                             data-mock-url="map-page"
-                            onClick={(e) => setPage(e.currentTarget.dataset.mockUrl)}
+                            onClick={(e) => onChangePage(e.currentTarget.dataset.mockUrl)}
                         >
                             Карта
                         </button>
@@ -23,7 +23,7 @@ const Menu = (props) => {
                             className="menu__link"
                             type="button"
                             data-mock-url="profile-page"
-                            onClick={(e) => setPage(e.currentTarget.dataset.mockUrl)}
+                            onClick={(e) => onChangePage(e.currentTarget.dataset.mockUrl)}
                         >
                             Профиль
                         </button>
