@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Header from '../src/app/components/header';
+import WelcomePage from '../src/app/views/welcome-page';
+import MapPage from '../src/app/views/map-page';
+import ProfilePage from '../src/app/views/profile-page';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+    state = {
+        page: 'welcome-page',
+    };
+
+    setPage = (page) => {
+        this.setState({ page });
+    };
+
+    render() {
+        const { page } = this.state;
+
+        const PAGES = {
+            'welcome-page': <WelcomePage onChangePage={this.setPage}/>,
+            'map-page': <MapPage/>,
+            'profile-page': <ProfilePage/>,
+        };
+
+        return (
+            <div className="container">
+                <Header onChangePage={this.setPage}/>
+                <main className="main">
+                    { PAGES[page] }
+                </main>
+            </div>
+        );
+    };
 }
 
 export default App;
