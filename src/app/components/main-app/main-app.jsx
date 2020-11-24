@@ -1,10 +1,12 @@
 import React from 'react';
 
-import Header from '../header';
+import MainLayout from '../main-layout';
 
 import WelcomePage from '../../views/welcome-page';
 import MapPage from '../../views/map-page';
 import ProfilePage from '../../views/profile-page';
+
+import withAuth from '../../common/HOCs/withAuth';
 
 class MainApp extends React.Component {
     state = {
@@ -26,14 +28,13 @@ class MainApp extends React.Component {
         };
 
         return (
-            <div className="container">
-                <Header onChangePage={this.setPage}/>
-                <main className="main">
-                    { PAGES[page] }
-                </main>
-            </div>
+            <MainLayout
+                onChangePage={this.setPage}
+            >
+                { PAGES[page] }
+            </MainLayout>
         );
     };
 }
 
-export default MainApp;
+export default withAuth(MainApp);

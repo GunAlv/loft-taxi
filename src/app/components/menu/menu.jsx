@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import getClass from '../../utils/getClass';
+import { AuthContext } from '../../common/providers/auth-provider';
 
 const Menu = (props) => {
+    const { logout } = useContext(AuthContext);
     const { onChangePage } = props;
 
     return (
@@ -32,6 +34,7 @@ const Menu = (props) => {
                         <button
                             className="menu__link"
                             type="button"
+                            onClick={logout}
                         >
                             Выйти
                         </button>
