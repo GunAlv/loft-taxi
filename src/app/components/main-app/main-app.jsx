@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import MainLayout from '../main-layout';
 
@@ -7,6 +8,10 @@ import MapPage from '../../views/map-page';
 import ProfilePage from '../../views/profile-page';
 
 import withAuth from '../../common/HOCs/withAuth';
+
+const propTypes = {
+    isLoggedIn: PropTypes.bool.isRequired,
+};
 
 class MainApp extends React.Component {
     state = {
@@ -37,5 +42,7 @@ class MainApp extends React.Component {
         );
     };
 }
+
+MainApp.propTypes = propTypes;
 
 export default withAuth(MainApp);

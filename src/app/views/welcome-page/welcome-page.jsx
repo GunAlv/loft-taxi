@@ -1,9 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { WelcomePageBlock, WelcomePageContent } from './style';
 
 import AsideLogo from '../../components/aside-logo';
 import StepForm from '../../components/step-form';
 import LoginForm from '../../components/login-form';
+
+const propTypes = {
+    onChangePage: PropTypes.func,
+};
 
 class WelcomePage extends React.Component {
     render() {
@@ -21,5 +26,7 @@ class WelcomePage extends React.Component {
         );
     };
 }
+
+WelcomePage.propTypes = propTypes;
 
 export default WelcomePage;

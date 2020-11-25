@@ -1,8 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { HeaderBlock, HeaderWrap } from './style';
 
 import Logo from '../logo';
 import Menu from '../menu';
+
+const propTypes = {
+    onChangePage: PropTypes.func,
+};
 
 const Header = (props) => {
     const { onChangePage } = props;
@@ -16,5 +21,7 @@ const Header = (props) => {
         </HeaderBlock>
     );
 };
+
+Header.propTypes = propTypes;
 
 export default Header;

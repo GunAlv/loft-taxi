@@ -1,10 +1,15 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { FormBody } from '../form/style';
 import { StyledTextField } from '../text-field/style';
 import { Link } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import { FormAuthBlock, FormAuthRow, FormAuthRowLink, FormAuthRowAction, FormAuthRowNotice } from '../form/form-auth/style';
 import { AuthContext } from '../../common/providers/auth-provider';
+
+const propTypes = {
+    onChangePage: PropTypes.func,
+};
 
 const LoginForm = (props) => {
     const { login } = useContext(AuthContext);
@@ -63,5 +68,7 @@ const LoginForm = (props) => {
         </FormAuthBlock>
     );
 }
+
+LoginForm.propTypes = propTypes;
 
 export default LoginForm;

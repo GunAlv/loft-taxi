@@ -1,9 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormBody } from '../form/style';
 import { StyledTextField } from '../text-field/style';
 import { Link } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import { FormAuthBlock, FormAuthRow, FormAuthRowLink, FormAuthRowAction, FormAuthRowNotice } from '../form/form-auth/style';
+
+const propTypes = {
+    onChangePage: PropTypes.func,
+};
 
 class RegistrationForm extends React.Component {
     submit = (e) => {
@@ -70,5 +75,7 @@ class RegistrationForm extends React.Component {
         );
     };
 }
+
+RegistrationForm.propTypes = propTypes;
 
 export default RegistrationForm;

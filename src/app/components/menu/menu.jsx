@@ -1,6 +1,11 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { MenuBlock, MenuList, MenuListItem, MenuLink } from './style';
 import { AuthContext } from '../../common/providers/auth-provider';
+
+const propTypes = {
+    onChangePage: PropTypes.func,
+};
 
 const Menu = (props) => {
     const { logout } = useContext(AuthContext);
@@ -36,5 +41,7 @@ const Menu = (props) => {
         </MenuBlock>
     );
 };
+
+Menu.propTypes = propTypes;
 
 export default Menu;
