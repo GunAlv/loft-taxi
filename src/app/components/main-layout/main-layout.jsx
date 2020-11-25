@@ -1,16 +1,21 @@
 import React from 'react';
+import { Container, Main } from './style';
 import Header from '../header';
 
 const MainLayout = (props) => {
-    const { children, onChangePage } = props;
+    const { page, children, onChangePage } = props;
 
     return (
-        <div className="container">
-            <Header onChangePage={onChangePage}/>
-            <main className="main">
+        <Container>
+            {
+                page !== 'welcome-page' && (
+                    <Header onChangePage={onChangePage}/>
+                )
+            }
+            <Main>
                 { children }
-            </main>
-        </div>
+            </Main>
+        </Container>
     );
 };
 

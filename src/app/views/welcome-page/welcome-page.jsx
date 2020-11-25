@@ -1,5 +1,5 @@
 import React from 'react';
-import getClass from '../../utils/getClass';
+import { WelcomePageBlock, WelcomePageContent } from './style';
 
 import AsideLogo from '../../components/aside-logo';
 import StepForm from '../../components/step-form';
@@ -10,14 +10,14 @@ class WelcomePage extends React.Component {
         const { onChangePage } = this.props;
 
         return (
-            <section className={getClass("welcome-page", this.props)}>
+            <WelcomePageBlock>
                 <AsideLogo/>
-                <div className="welcome-page__content">
-                    <StepForm mods="welcome-page__step-form">
+                <WelcomePageContent>
+                    <StepForm title="Вход">
                         <LoginForm onChangePage={onChangePage}/>
                     </StepForm>
-                </div>
-            </section>
+                </WelcomePageContent>
+            </WelcomePageBlock>
         );
     };
 }

@@ -1,9 +1,8 @@
 import React from 'react';
+import { MapBlock } from './style';
 import MapBox from '../map-box';
 import mapboxgl from 'mapbox-gl';
 import mapData from '../../common/constants/map';
-
-import getClass from '../../utils/getClass';
 
 mapboxgl.accessToken = mapData.accessToken;
 
@@ -44,9 +43,9 @@ class Map extends React.Component {
 
     render() {
         return (
-            <div className={getClass("map", this.props)}>
+            <MapBlock>
                 <MapBox ref={el => this.mapContainer = el} />
-            </div>
+            </MapBlock>
         );
     };
 }

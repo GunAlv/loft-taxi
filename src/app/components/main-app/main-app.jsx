@@ -29,6 +29,7 @@ class MainApp extends React.Component {
 
         return (
             <MainLayout
+                page={page}
                 onChangePage={this.setPage}
             >
                 { PAGES[page] }

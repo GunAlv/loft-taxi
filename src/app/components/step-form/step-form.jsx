@@ -1,16 +1,19 @@
 import React from 'react';
-import getClass from '../../utils/getClass';
+import { StepFormBlock, StepFormTitleContainer } from './style';
+import { Title } from '../title/style';
 
 const StepForm = (props) => {
     const { title, children } = props;
 
     return (
-        <div className={getClass("step-form", props)}>
-            <h1 className="step-form__title title">
-                {title}
-            </h1>
+        <StepFormBlock>
+            <StepFormTitleContainer>
+                <Title variant="h2" component="h1">
+                    {title}
+                </Title>
+            </StepFormTitleContainer>
             {children}
-        </div>
+        </StepFormBlock>
     );
 };
 

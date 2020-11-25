@@ -1,6 +1,10 @@
 import React, { useContext } from 'react';
+import { FormBody } from '../form/style';
+import { StyledTextField } from '../text-field/style';
+import { Link } from '@material-ui/core';
+import { Button } from '@material-ui/core';
+import { FormAuthBlock, FormAuthRow, FormAuthRowLink, FormAuthRowAction, FormAuthRowNotice } from '../form/form-auth/style';
 import { AuthContext } from '../../common/providers/auth-provider';
-import getClass from '../../utils/getClass';
 
 const LoginForm = (props) => {
     const { login } = useContext(AuthContext);
@@ -14,56 +18,49 @@ const LoginForm = (props) => {
     };
 
     return (
-        <form onSubmit={submit} className={getClass("login-form form", props)}>
-            <div className="form__body">
-                <div className="form__row">
-                    <div className="form__col">
-                        <label htmlFor="login-email" className="form__label">
-                            Email
-                        </label>
-                        <div className="form__control">
-                            <input
-                                type="text"
-                                name="login-email"
-                                id="login-email"
-                                className="input form__input"
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div className="form__row">
-                    <div className="form__col">
-                        <label htmlFor="login-password" className="form__label">
-                            Пароль
-                        </label>
-                        <div className="form__control">
-                            <input
-                                type="password"
-                                name="login-password"
-                                id="login-password"
-                                className="input form__input"
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div className="form__row-link">
-                    <a href="#" className="link link_theme_additional">
+        <FormAuthBlock onSubmit={submit}>
+            <FormBody>
+                <FormAuthRow>
+                    <StyledTextField
+                        type="text"
+                        name="login-email"
+                        id="login-email"
+                        placeholder="mail@mail.ru"
+                        label="Email"
+                    />
+                </FormAuthRow>
+                <FormAuthRow>
+                    <StyledTextField
+                        type="password"
+                        name="login-password"
+                        id="login-password"
+                        placeholder="*************"
+                        label="Пароль"
+                    />
+                </FormAuthRow>
+                <FormAuthRowLink>
+                    <Link
+                        color="secondary"
+                    >
                         Забыли пароль?
-                    </a>
-                </div>
-                <div className="form__row-action">
-                    <button className="button button_theme_standard" type="submit">
+                    </Link>
+                </FormAuthRowLink>
+                <FormAuthRowAction>
+                    <Button
+                        variant="contained"
+                        type="submit"
+                    >
                         Войти
-                    </button>
-                </div>
-                <div className="form__row-notice">
-                    Новый пользователь?
-                    <a href="#" className="link link_theme_standard">
+                    </Button>
+                </FormAuthRowAction>
+                <FormAuthRowNotice>
+                    <span>Новый пользователь?</span>
+                    <Link>
                         Регистрация
-                    </a>
-                </div>
-            </div>
-        </form>
+                    </Link>
+                </FormAuthRowNotice>
+            </FormBody>
+        </FormAuthBlock>
     );
 }
 
