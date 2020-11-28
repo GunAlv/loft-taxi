@@ -12,7 +12,9 @@ const Menu = (props) => {
     const { onChangePage } = props;
 
     return (
-        <MenuBlock>
+        <MenuBlock
+            data-testid="menu"
+        >
             <MenuList>
                 <MenuListItem>
                     <MenuLink

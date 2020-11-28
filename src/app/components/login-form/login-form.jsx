@@ -23,7 +23,10 @@ const LoginForm = (props) => {
     };
 
     return (
-        <FormAuthBlock onSubmit={submit}>
+        <FormAuthBlock
+            data-testid="login-form"
+            onSubmit={submit}
+        >
             <FormBody>
                 <FormAuthRow>
                     <StyledTextField
