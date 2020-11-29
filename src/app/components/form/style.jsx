@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 
-export const FormBlock = styled.form`
-    width: 100%;
-`;
-
-export const FormBody = styled.div`
+export const FormContainer = styled.form`
     width: 100%;
 `;
 

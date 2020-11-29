@@ -1,8 +1,8 @@
 import React from 'react';
-import { MapBoxBlock } from './style';
+import { MapBoxContainer } from './style';
 
 const MapBox = React.forwardRef((props, ref) => (
-    <MapBoxBlock ref={ref} />
+    <MapBoxContainer ref={ref} />
 ));
 
 export default MapBox;

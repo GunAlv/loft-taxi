@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { FormBlock, FormRow } from '../style';
+import { FormContainer, FormRow } from '../style';
 
-export const FormAuthBlock = styled(FormBlock)`
+export const FormAuthContainer = styled(FormContainer)`
     margin-top: 40px;
 `;
 

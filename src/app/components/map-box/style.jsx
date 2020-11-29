@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const MapBoxBlock = styled.div`
+export const MapBoxContainer = styled.div`
     width: 100%;
     height: 100%;
 `;

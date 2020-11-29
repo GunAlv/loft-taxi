@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const MapBlock = styled.div`
+export const MapContainer = styled.div`
     height: 100%;
     position: relative;
 `;

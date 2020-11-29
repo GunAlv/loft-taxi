@@ -8,7 +8,7 @@ export const Container = styled.div`
 `;
 
 export const Main = styled.main`
-    background-image: url('${mainBg}');
+    background-image: url(${mainBg});
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;

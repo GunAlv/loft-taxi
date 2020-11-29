@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const AsideLogoBlock = styled.aside`
+export const AsideLogoContainer = styled.aside`
     background-color: #1C1A19;
     width: 34%;
     display: flex;

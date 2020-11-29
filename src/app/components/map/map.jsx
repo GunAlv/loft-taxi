@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapBlock } from './style';
+import { MapContainer } from './style';
 import MapBox from '../map-box';
 import mapboxgl from 'mapbox-gl';
 import mapData from '../../common/constants/map';
@@ -43,9 +43,9 @@ class Map extends React.Component {
 
     render() {
         return (
-            <MapBlock>
+            <MapContainer>
                 <MapBox ref={el => this.mapContainer = el} />
-            </MapBlock>
+            </MapContainer>
         );
     };
 }

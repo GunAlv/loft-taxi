@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StepFormBlock = styled.div`
+export const StepFormContainer = styled.div`
     background: #fff;
     box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.1);
     border-radius: 20px;

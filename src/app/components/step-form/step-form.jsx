@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StepFormBlock, StepFormTitleContainer } from './style';
+import { StepFormContainer, StepFormTitleContainer } from './style';
 import { Title } from '../title/style';
 
 const propTypes = {
@@ -10,14 +10,14 @@ const propTypes = {
 
 const StepForm = ({ title, children }) => {
     return (
-        <StepFormBlock>
+        <StepFormContainer>
             <StepFormTitleContainer>
                 <Title variant="h2" component="h1">
                     {title}
                 </Title>
             </StepFormTitleContainer>
             {children}
-        </StepFormBlock>
+        </StepFormContainer>
     );
 };
 

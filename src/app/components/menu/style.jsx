@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from '@material-ui/core';
 
-export const MenuBlock = styled.nav`
+export const MenuContainer = styled.nav`
     display: flex;
     align-items: center;
 `;
