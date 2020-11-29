@@ -9,9 +9,7 @@ const propTypes = {
     onChangePage: PropTypes.func,
 };
 
-const MainLayout = (props) => {
-    const { page, children, onChangePage } = props;
-
+const MainLayout = ({ page, children, onChangePage }) => {
     return (
         <Container>
             {

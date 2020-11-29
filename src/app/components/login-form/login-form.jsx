@@ -11,12 +11,10 @@ const propTypes = {
     onChangePage: PropTypes.func,
 };
 
-const LoginForm = (props) => {
+const LoginForm = ({ onChangePage }) => {
     const { login } = useContext(AuthContext);
 
     const submit = (e) => {
-        const { onChangePage } = props;
-
         e.preventDefault();
         login();
         onChangePage('map-page');

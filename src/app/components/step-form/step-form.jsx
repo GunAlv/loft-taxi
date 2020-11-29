@@ -8,9 +8,7 @@ const propTypes = {
     children: PropTypes.node.isRequired,
 };
 
-const StepForm = (props) => {
-    const { title, children } = props;
-
+const StepForm = ({ title, children }) => {
     return (
         <StepFormBlock>
             <StepFormTitleContainer>

@@ -9,9 +9,7 @@ const propTypes = {
     onChangePage: PropTypes.func,
 };
 
-const Header = (props) => {
-    const { onChangePage } = props;
-
+const Header = ({ onChangePage }) => {
     return (
         <HeaderBlock>
             <HeaderWrap>

@@ -7,9 +7,8 @@ const propTypes = {
     onChangePage: PropTypes.func,
 };
 
-const Menu = (props) => {
+const Menu = ({ onChangePage }) => {
     const { logout } = useContext(AuthContext);
-    const { onChangePage } = props;
 
     return (
         <MenuBlock

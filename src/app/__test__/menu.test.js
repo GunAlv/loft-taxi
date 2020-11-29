@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { AuthContext } from '../common/providers/auth-provider';
 import Menu from '../components/menu';
 
-describe('Форма логина', () => {
+describe('Меню', () => {
     let mockOnChangePage = jest.fn();
     let logout = jest.fn();
 
