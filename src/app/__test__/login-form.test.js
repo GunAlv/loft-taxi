@@ -28,12 +28,12 @@ describe('Форма логина', () => {
 
     it('Форма рендерится', () => {
         const loginForm = screen.getByTestId('login-form');
-        expect(loginForm).toBeTruthy();
+        expect(loginForm).toBeInTheDocument();
     });
 
     it('Сабмит формы перенаправляет на страницу с картой', () => {
         const loginForm = screen.getByTestId('login-form');
         fireEvent.submit(loginForm);
-        expect(mockOnChangePage).toHaveBeenCalled();
+        expect(mockOnChangePage).toHaveBeenCalledWith('map-page');
     });
 });

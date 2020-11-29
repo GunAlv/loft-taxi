@@ -28,7 +28,7 @@ describe('Меню', () => {
 
     it('Меню рендерится', () => {
         const menu = screen.getByTestId('menu');
-        expect(menu).toBeTruthy();
+        expect(menu).toBeInTheDocument();
     });
 
     it('Клик по кнопке навигации вызывает функцию редиректа', () => {
