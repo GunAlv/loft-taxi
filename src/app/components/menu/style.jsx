@@ -19,7 +19,7 @@ export const MenuListItem = styled.li`
 `;
 
 export const MenuLink = styled(Link)`
-    color: #fff;
     font-size: 21px;
     line-height: 25px;
+    color: ${p => p.theme.palette.primary.light};
 `;

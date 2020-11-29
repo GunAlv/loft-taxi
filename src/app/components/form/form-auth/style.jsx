@@ -28,7 +28,6 @@ export const FormAuthRowNotice = styled.div`
     
     && span {
         margin: 0;
-        color: #828282;
         margin-right: 4px;
         font-size: 16px;
         line-height: 19px;
