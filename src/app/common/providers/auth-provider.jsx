@@ -19,11 +19,12 @@ class AuthProvider extends React.Component {
 
     render() {
       const { children } = this.props;
+      const { isLoggedIn } = this.state;
 
       return (
           <AuthContext.Provider
               value={{
-                  ...this.state,
+                  isLoggedIn,
                   login: this.login,
                   logout: this.logout,
               }}
