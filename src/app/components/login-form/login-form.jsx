@@ -1,68 +1,72 @@
-import React from 'react';
-import getClass from '../../utils/getClass';
+import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
+import { StyledTextField } from '../text-field/style';
+import { Link } from '@material-ui/core';
+import { Button } from '@material-ui/core';
+import { FormAuthContainer, FormAuthRow, FormAuthRowLink, FormAuthRowAction, FormAuthRowNotice } from '../form/form-auth/style';
+import { AuthContext } from '../../common/providers/auth-provider';
 
-class LoginForm extends React.Component {
-    submit = (e) => {
-        const { onChangePage } = this.props;
+const propTypes = {
+    onChangePage: PropTypes.func,
+};
 
+const LoginForm = ({ onChangePage }) => {
+    const { login } = useContext(AuthContext);
+
+    const submit = (e) => {
         e.preventDefault();
+        login();
         onChangePage('map-page');
-    }
-
-    render() {
-        return (
-            <form onSubmit={this.submit} className={getClass("login-form form", this.props)}>
-                <div className="form__body">
-                    <div className="form__row">
-                        <div className="form__col">
-                            <label htmlFor="login-email" className="form__label">
-                                Email
-                            </label>
-                            <div className="form__control">
-                                <input
-                                    type="text"
-                                    name="login-email"
-                                    id="login-email"
-                                    className="input form__input"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="form__row">
-                        <div className="form__col">
-                            <label htmlFor="login-password" className="form__label">
-                                Пароль
-                            </label>
-                            <div className="form__control">
-                                <input
-                                    type="password"
-                                    name="login-password"
-                                    id="login-password"
-                                    className="input form__input"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="form__row-link">
-                        <a href="#" className="link link_theme_additional">
-                            Забыли пароль?
-                        </a>
-                    </div>
-                    <div className="form__row-action">
-                        <button className="button button_theme_standard" type="submit">
-                            Войти
-                        </button>
-                    </div>
-                    <div className="form__row-notice">
-                        Новый пользователь?
-                        <a href="#" className="link link_theme_standard">
-                            Регистрация
-                        </a>
-                    </div>
-                </div>
-            </form>
-        );
     };
+
+    return (
+        <FormAuthContainer
+            data-testid="login-form"
+            onSubmit={submit}
+        >
+            <FormAuthRow>
+                <StyledTextField
+                    type="text"
+                    name="login-email"
+                    id="login-email"
+                    placeholder="mail@mail.ru"
+                    label="Email"
+                />
+            </FormAuthRow>
+            <FormAuthRow>
+                <StyledTextField
+                    type="password"
+                    name="login-password"
+                    id="login-password"
+                    placeholder="*************"
+                    label="Пароль"
+                />
+            </FormAuthRow>
+            <FormAuthRowLink>
+                <Link
+                    color="secondary"
+                >
+                    Забыли пароль?
+                </Link>
+            </FormAuthRowLink>
+            <FormAuthRowAction>
+                <Button
+                    variant="contained"
+                    type="submit"
+                >
+                    Войти
+                </Button>
+            </FormAuthRowAction>
+            <FormAuthRowNotice>
+                <span>Новый пользователь?</span>
+                <Link>
+                    Регистрация
+                </Link>
+            </FormAuthRowNotice>
+        </FormAuthContainer>
+    );
 }
+
+LoginForm.propTypes = propTypes;
 
 export default LoginForm;

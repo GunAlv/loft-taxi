@@ -1,17 +1,26 @@
 import React from 'react';
-import getClass from '../../utils/getClass';
+import PropTypes from 'prop-types';
+import { StepFormContainer, StepFormTitleContainer } from './style';
+import { Title } from '../title/style';
 
-const StepForm = (props) => {
-    const { title, children } = props;
+const propTypes = {
+    title: PropTypes.string.isRequired,
+    children: PropTypes.node.isRequired,
+};
 
+const StepForm = ({ title, children }) => {
     return (
-        <div className={getClass("step-form", props)}>
-            <h1 className="step-form__title title">
-                {title}
-            </h1>
+        <StepFormContainer>
+            <StepFormTitleContainer>
+                <Title variant="h2" component="h1">
+                    {title}
+                </Title>
+            </StepFormTitleContainer>
             {children}
-        </div>
+        </StepFormContainer>
     );
 };
+
+StepForm.propTypes = propTypes;
 
 export default StepForm;

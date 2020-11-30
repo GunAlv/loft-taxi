@@ -1,12 +1,12 @@
 import React from 'react';
-import getClass from '../../utils/getClass';
+import { AsideLogoContainer, AsideLogoImage } from './style';
 
 import asideLogoImage from './__image/aside-logo__image.svg';
 
-const AsideLogo = (props) => (
-    <aside className={getClass("aside-logo", props)}>
-        <img className="aside-logo__image" src={asideLogoImage} alt="Loft Taxi"/>
-    </aside>
+const AsideLogo = () => (
+    <AsideLogoContainer>
+        <AsideLogoImage src={asideLogoImage} alt="Loft Taxi"/>
+    </AsideLogoContainer>
 );
 
 export default AsideLogo;

@@ -1,5 +1,13 @@
 import React from 'react';
-import getClass from '../../utils/getClass';
+import PropTypes from 'prop-types';
+import { StyledTextField } from '../text-field/style';
+import { Link } from '@material-ui/core';
+import { Button } from '@material-ui/core';
+import { FormAuthContainer, FormAuthRow, FormAuthRowLink, FormAuthRowAction, FormAuthRowNotice } from '../form/form-auth/style';
+
+const propTypes = {
+    onChangePage: PropTypes.func,
+};
 
 class RegistrationForm extends React.Component {
     submit = (e) => {
@@ -11,73 +19,60 @@ class RegistrationForm extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.submit} className={getClass("registration-form form", this.props)}>
-                <div className="form__body">
-                    <div className="form__row">
-                        <div className="form__col">
-                            <label htmlFor="registration-email" className="form__label">
-                                Email*
-                            </label>
-                            <div className="form__control">
-                                <input
-                                    type="text"
-                                    name="registration-email"
-                                    id="registration-email"
-                                    className="input form__input"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="form__row">
-                        <div className="form__col">
-                            <label htmlFor="registration-name" className="form__label">
-                                Как вас зовут?*
-                            </label>
-                            <div className="form__control">
-                                <input
-                                    type="text"
-                                    name="registration-name"
-                                    id="registration-name"
-                                    className="input form__input"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="form__row">
-                        <div className="form__col">
-                            <label htmlFor="registration-password" className="form__label">
-                                Придумайте пароль*
-                            </label>
-                            <div className="form__control">
-                                <input
-                                    type="password"
-                                    name="registration-password"
-                                    id="registration-password"
-                                    className="input form__input"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="form__row-link">
-                        <a href="#" className="link link_theme_additional">
-                            Забыли пароль?
-                        </a>
-                    </div>
-                    <div className="form__row-action">
-                        <button className="button button_theme_standard" type="submit">
-                            Зарегистрироваться
-                        </button>
-                    </div>
-                    <div className="form__row-notice">
-                        Уже зарегистрированы?
-                        <a href="#" className="link link_theme_standard">
-                            Войти
-                        </a>
-                    </div>
-                </div>
-            </form>
+            <FormAuthContainer onSubmit={this.submit}>
+                <FormAuthRow>
+                    <StyledTextField
+                        type="text"
+                        name="registration-email"
+                        id="registration-email"
+                        placeholder="mail@mail.ru"
+                        label="Email*"
+                    />
+                </FormAuthRow>
+                <FormAuthRow>
+                    <StyledTextField
+                        type="text"
+                        name="registration-name"
+                        id="registration-name"
+                        placeholder="Петр Александрович"
+                        label="Как вас зовут?*"
+                    />
+                </FormAuthRow>
+                <FormAuthRow>
+                    <StyledTextField
+                        type="password"
+                        name="registration-password"
+                        id="registration-password"
+                        placeholder="*************"
+                        label="Придумайте пароль*"
+                    />
+                </FormAuthRow>
+                <FormAuthRowLink>
+                    <Link
+                        color="secondary"
+                    >
+                        Забыли пароль?
+                    </Link>
+                </FormAuthRowLink>
+                <FormAuthRowAction>
+                    <Button
+                        variant="contained"
+                        type="submit"
+                    >
+                        Зарегистрироваться
+                    </Button>
+                </FormAuthRowAction>
+                <FormAuthRowNotice>
+                    <span>Уже зарегистрированы?</span>
+                    <Link>
+                        Войти
+                    </Link>
+                </FormAuthRowNotice>
+            </FormAuthContainer>
         );
     };
 }
+
+RegistrationForm.propTypes = propTypes;
 
 export default RegistrationForm;

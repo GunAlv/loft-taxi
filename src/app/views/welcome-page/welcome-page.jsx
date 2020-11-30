@@ -1,32 +1,32 @@
 import React from 'react';
-import getClass from '../../utils/getClass';
+import PropTypes from 'prop-types';
+import { WelcomePageBlock, WelcomePageContent } from './style';
 
 import AsideLogo from '../../components/aside-logo';
 import StepForm from '../../components/step-form';
 import LoginForm from '../../components/login-form';
-import RegistrationForm from '../../components/registration-form';
+
+const propTypes = {
+    onChangePage: PropTypes.func,
+};
 
 class WelcomePage extends React.Component {
     render() {
-        const { isLogin, onChangePage } = this.props;
+        const { onChangePage } = this.props;
 
         return (
-            <section className={getClass("welcome-page", this.props)}>
+            <WelcomePageBlock>
                 <AsideLogo/>
-                <div className="welcome-page__content">
-                    <StepForm mods="welcome-page__step-form">
-                        {
-                            isLogin ? (
-                                <LoginForm onChangePage={onChangePage}/>
-                            ) : (
-                                <RegistrationForm onChangePage={onChangePage}/>
-                            )
-                        }
+                <WelcomePageContent>
+                    <StepForm title="Вход">
+                        <LoginForm onChangePage={onChangePage}/>
                     </StepForm>
-                </div>
-            </section>
+                </WelcomePageContent>
+            </WelcomePageBlock>
         );
     };
 }
+
+WelcomePage.propTypes = propTypes;
 
 export default WelcomePage;

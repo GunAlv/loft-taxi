@@ -1,12 +1,14 @@
 import React from 'react';
-import getClass from '../../utils/getClass';
+import { Link } from '@material-ui/core';
 
 import logoImage from './__image/logo__image.svg';
 
-const Logo = (props) => (
-    <a href="/" className={getClass("logo", props)}>
-        <img className="logo__image" src={logoImage} alt="Loft Taxi"/>
-    </a>
+const Logo = () => (
+    <Link
+        href="/"
+    >
+        <img src={logoImage} alt="Loft Taxi"/>
+    </Link>
 );
 
 export default Logo;

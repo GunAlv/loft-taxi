@@ -1,34 +1,23 @@
 import React from 'react';
-import Header from '../src/app/components/header';
-import WelcomePage from '../src/app/views/welcome-page';
-import MapPage from '../src/app/views/map-page';
-import ProfilePage from '../src/app/views/profile-page';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider } from 'styled-components';
+import { theme } from './app/common/utils/theme';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import AuthProvider from '../src/app/common/providers/auth-provider';
+import MainApp from '../src/app/components/main-app';
 
 class App extends React.Component {
-    state = {
-        page: 'welcome-page',
-    };
-
-    setPage = (page) => {
-        this.setState({ page });
-    };
-
     render() {
-        const { page } = this.state;
-
-        const PAGES = {
-            'welcome-page': <WelcomePage onChangePage={this.setPage}/>,
-            'map-page': <MapPage/>,
-            'profile-page': <ProfilePage/>,
-        };
-
         return (
-            <div className="container">
-                <Header onChangePage={this.setPage}/>
-                <main className="main">
-                    { PAGES[page] }
-                </main>
-            </div>
+            <MuiThemeProvider theme={theme}>
+                <ThemeProvider theme={theme}>
+                    <CssBaseline>
+                        <AuthProvider>
+                            <MainApp/>
+                        </AuthProvider>
+                    </CssBaseline>
+                </ThemeProvider>
+            </MuiThemeProvider>
         );
     };
 }

@@ -33,3 +33,6 @@ jsconfig.json
 
 # -- IDEA --
 /.idea
+
+# -- tokens --
+/src/app/common/constants/map.js
