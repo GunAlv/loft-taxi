@@ -31,7 +31,7 @@ const LoginForm = ({ onChangeForm, setAuth }) => {
         >
             <FormAuthRow>
                 <StyledTextField
-                    type="text"
+                    type="email"
                     name="login-email"
                     id="login-email"
                     placeholder="mail@mail.ru"

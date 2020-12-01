@@ -5,9 +5,7 @@ import Profile from '../../components/profile';
 class ProfilePage extends React.Component {
     render() {
         return (
-            <section>
-                <Profile/>
-            </section>
+            <Profile/>
         );
     };
 }

@@ -30,7 +30,7 @@ const RegistrationForm = ({ onChangeForm, setRegister }) => {
         <FormAuthContainer onSubmit={submit}>
             <FormAuthRow>
                 <StyledTextField
-                    type="text"
+                    type="email"
                     name="registration-email"
                     id="registration-email"
                     placeholder="mail@mail.ru"
