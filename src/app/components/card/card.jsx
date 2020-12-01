@@ -2,13 +2,13 @@ import React from 'react';
 import { CardContainer, CardDate, CardNumber, CardTop } from './style';
 import cardLogo  from './card-logo.svg';
 
-const Card = () => (
+const Card = ({ number, date }) => (
     <CardContainer>
         <CardTop>
             <img src={`${cardLogo}`} alt="Иконка платежной карты"/>
-            <CardDate></CardDate>
+            <CardDate>{date}</CardDate>
         </CardTop>
-        <CardNumber></CardNumber>
+        <CardNumber>{number}</CardNumber>
     </CardContainer>
 );
 
