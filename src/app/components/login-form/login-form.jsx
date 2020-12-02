@@ -7,13 +7,15 @@ import { FormAuthContainer, FormAuthRow, FormAuthRowLink, FormAuthRowAction, For
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { setAuth } from '../../module/actions/auth';
+import ErrorLabel from '../error-label';
 
 const propTypes = {
     onChangeForm: PropTypes.func.isRequired,
     setAuth: PropTypes.func.isRequired,
+    authError: PropTypes.string.isRequired,
 };
 
-const LoginForm = ({ onChangeForm, setAuth }) => {
+const LoginForm = ({ onChangeForm, setAuth, authError }) => {
     const submit = (e) => {
         e.preventDefault();
 
@@ -34,6 +36,7 @@ const LoginForm = ({ onChangeForm, setAuth }) => {
             data-testid="login-form"
             onSubmit={submit}
         >
+            { authError && (<ErrorLabel>{authError}</ErrorLabel>) }
             <FormAuthRow>
                 <StyledTextField
                     type="email"
@@ -83,7 +86,9 @@ LoginForm.propTypes = propTypes;
 
 export default compose(
     connect(
-        null,
+        (state => ({
+            authError: state.authReducer.authError,
+        })),
         (dispatch => ({
             setAuth: (email, password) => dispatch(setAuth(email, password)),
         })),

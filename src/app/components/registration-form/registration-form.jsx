@@ -7,13 +7,15 @@ import { FormAuthContainer, FormAuthRow, FormAuthRowLink, FormAuthRowAction, For
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { setRegister } from '../../module/actions/register';
+import ErrorLabel from '../error-label';
 
 const propTypes = {
     onChangeForm: PropTypes.func.isRequired,
     setRegister: PropTypes.func.isRequired,
+    registerError: PropTypes.string.isRequired,
 };
 
-const RegistrationForm = ({ onChangeForm, setRegister }) => {
+const RegistrationForm = ({ onChangeForm, setRegister, registerError }) => {
     const submit = (e) => {
         e.preventDefault();
 
@@ -33,6 +35,7 @@ const RegistrationForm = ({ onChangeForm, setRegister }) => {
 
     return (
         <FormAuthContainer onSubmit={submit}>
+            { registerError && (<ErrorLabel>{registerError}</ErrorLabel>) }
             <FormAuthRow>
                 <StyledTextField
                     type="email"
@@ -100,7 +103,9 @@ RegistrationForm.propTypes = propTypes;
 
 export default compose(
     connect(
-        null,
+        (state => ({
+            registerError: state.registerReducer.registerError,
+        })),
         (dispatch => ({
             setRegister: (email, password, name, surname) => dispatch(setRegister(email, password, name, surname)),
         })),

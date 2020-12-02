@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { baseAPI } from '../../common/constants/baseAPI';
 import { REMOVE_AUTH, SET_AUTH } from '../../common/constants/action-types';
-import { getAuthProgress, getAuthStatus } from '../actions/auth';
+import { getAuthError, getAuthProgress, getAuthStatus } from '../actions/auth';
 import { deleteAuthStorage, setAuthStorage } from '../../common/utils/authStorage';
+import { getRegisterError } from '../actions/register';
 
 export const authMiddleware = store => next => action => {
     if (action.type === SET_AUTH) {
@@ -15,6 +16,7 @@ export const authMiddleware = store => next => action => {
 
                 if (!data.success) {
                     store.dispatch(getAuthStatus(false));
+                    store.dispatch(getAuthError(data.error));
 
                     return;
                 }
@@ -30,6 +32,8 @@ export const authMiddleware = store => next => action => {
     }
 
     if (action.type === REMOVE_AUTH) {
+        store.dispatch(getAuthError(''));
+        store.dispatch(getRegisterError(''));
         store.dispatch(getAuthStatus(false, undefined));
         deleteAuthStorage();
     }

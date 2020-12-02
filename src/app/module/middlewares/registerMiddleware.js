@@ -3,6 +3,7 @@ import { baseAPI } from '../../common/constants/baseAPI';
 import { SET_REGISTER } from '../../common/constants/action-types';
 import { getAuthProgress, getAuthStatus } from '../actions/auth';
 import { setAuthStorage } from '../../common/utils/authStorage';
+import { getRegisterError } from '../actions/register';
 
 export const registerMiddleware = store => next => action => {
     if (action.type === SET_REGISTER) {
@@ -15,11 +16,13 @@ export const registerMiddleware = store => next => action => {
 
                 if (!data.success) {
                     store.dispatch(getAuthStatus(false));
+                    store.dispatch(getRegisterError(data.error));
 
                     return;
                 }
 
                 setAuthStorage(true, data.token);
+                store.dispatch(getRegisterError(''));
                 store.dispatch(getAuthStatus(true, data.token));
             })
             .catch(error => {

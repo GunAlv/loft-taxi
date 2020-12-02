@@ -2,7 +2,7 @@ import {
     SET_AUTH,
     GET_AUTH_PROGRESS,
     GET_AUTH_STATUS,
-    REMOVE_AUTH,
+    REMOVE_AUTH, GET_AUTH_ERROR,
 } from '../../common/constants/action-types';
 
 export const setAuth = (email, password) => ({
@@ -24,6 +24,11 @@ export const getAuthStatus = (isLoggedIn, token) => ({
         isLoggedIn,
         token: token,
     },
+});
+
+export const getAuthError = (error) => ({
+    type: GET_AUTH_ERROR,
+    payload: error,
 });
 
 export const removeAuth = () => ({

@@ -1,7 +1,10 @@
 export const SET_REGISTER = 'SET_REGISTER';
+export const GET_REGISTER_ERROR = 'GET_REGISTER_ERROR';
+
 export const SET_AUTH = 'SET_AUTH';
 export const GET_AUTH_PROGRESS = 'GET_AUTH_PROGRESS';
 export const GET_AUTH_STATUS = 'GET_AUTH_STATUS';
+export const GET_AUTH_ERROR = 'GET_AUTH_ERROR';
 
 export const REMOVE_AUTH = 'REMOVE_AUTH';
 

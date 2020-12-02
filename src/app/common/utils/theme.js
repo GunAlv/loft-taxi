@@ -9,6 +9,7 @@ export const theme = createMuiTheme({
         },
         secondary: {
             main: '#828282',
+            error: '#FF0000',
         },
     },
     overrides: {
