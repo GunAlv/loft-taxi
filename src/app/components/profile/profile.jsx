@@ -111,7 +111,9 @@ class Profile extends React.Component {
         const { showSuccessInfo } = this.props;
 
         return (
-            <ProfileContainer>
+            <ProfileContainer
+                data-testid="profile"
+            >
                 <ProfileIntro>
                     <Title variant="h1" component="h1">
                         Профиль
@@ -136,7 +138,10 @@ class Profile extends React.Component {
                             </Button>
                         </ProfileAction>
                     ) : (
-                        <FormContainer onSubmit={this.submit}>
+                        <FormContainer
+                            data-testid="profile-form"
+                            onSubmit={this.submit}
+                        >
                             <FormBody>
                                 <FormPaymentInner>
                                     <FormRow>

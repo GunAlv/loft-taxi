@@ -36,7 +36,7 @@ const LoginForm = ({ onChangeForm, setAuth, authError }) => {
             data-testid="login-form"
             onSubmit={submit}
         >
-            { authError && (<ErrorLabel>{authError}</ErrorLabel>) }
+            { authError && (<ErrorLabel data-testid="login-error">{authError}</ErrorLabel>) }
             <FormAuthRow>
                 <StyledTextField
                     type="email"

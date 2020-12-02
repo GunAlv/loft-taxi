@@ -34,8 +34,11 @@ const RegistrationForm = ({ onChangeForm, setRegister, registerError }) => {
     };
 
     return (
-        <FormAuthContainer onSubmit={submit}>
-            { registerError && (<ErrorLabel>{registerError}</ErrorLabel>) }
+        <FormAuthContainer
+            data-testid="registration-form"
+            onSubmit={submit}
+        >
+            { registerError && (<ErrorLabel data-testid="registration-error">{registerError}</ErrorLabel>) }
             <FormAuthRow>
                 <StyledTextField
                     type="email"

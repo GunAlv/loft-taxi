@@ -10,8 +10,8 @@ const defaultProps = {
     children: 'Ошибка',
 };
 
-const ErrorLabel = ({ children }) => (
-    <ErrorLabelContainer>
+const ErrorLabel = ({ children, ...rest }) => (
+    <ErrorLabelContainer {...rest}>
         {children}
     </ErrorLabelContainer>
 );
