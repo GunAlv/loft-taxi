@@ -3,13 +3,14 @@ import {
     GET_PAYMENT_STATUS,
     REMOVE_PAYMENT_SUCCESS_INFO
 } from '../../common/constants/action-types';
+import { getFromPaymentStorage } from '../../common/utils/paymentStorage';
 
 const initialState = {
     card: {
-        cardNumber: '',
-        cardName: '',
-        expiryDate: '',
-        cvc: '',
+        cardNumber: getFromPaymentStorage('cardNumber') || '',
+        cardName: getFromPaymentStorage('cardName') || '',
+        expiryDate: getFromPaymentStorage('expiryDate') || '',
+        cvc: getFromPaymentStorage('cvc') || '',
     },
     isFetched: false,
     showSuccessInfo: false,
@@ -34,7 +35,6 @@ const paymentReducer = (state = initialState, action) => {
             return {
                 ...state,
                 card: action.payload,
-                isFetched: true,
             }
 
         default:

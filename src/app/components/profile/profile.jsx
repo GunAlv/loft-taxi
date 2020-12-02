@@ -8,7 +8,7 @@ import { ProfileAction, ProfileContainer, ProfileDescription, ProfileIntro } fro
 import { FormPaymentInner } from '../form/form-payment/style';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { getPayment, pushPayment, paymentSuccessInfoDisable } from '../../module/actions/payment';
+import { pushPayment, paymentSuccessInfoDisable } from '../../module/actions/payment';
 
 const NUMBER_LIMIT = 19;
 const DATE_LIMIT = 5;
@@ -22,16 +22,9 @@ class Profile extends React.Component {
     };
 
     componentDidMount() {
-        const { token, getPayment } = this.props;
-        getPayment(token);
-    }
+        const { card } = this.props;
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps !== this.props) {
-            const { card } = this.props;
-
-            this.setState({ ...card })
-        }
+        this.setState({ ...card })
     }
 
     submit = (e) => {
@@ -91,9 +84,8 @@ class Profile extends React.Component {
     };
 
     removeSuccessInfo = () => {
-        const { token, paymentSuccessInfoDisable, getPayment } = this.props;
+        const { paymentSuccessInfoDisable } = this.props;
         paymentSuccessInfoDisable();
-        getPayment(token);
     };
 
     render() {
@@ -201,7 +193,6 @@ export default compose(
         (dispatch => ({
             pushPayment: (cardNumber, expiryDate, cardName, cvc, token) => dispatch(pushPayment(cardNumber, expiryDate, cardName, cvc, token)),
             paymentSuccessInfoDisable: () => dispatch(paymentSuccessInfoDisable()),
-            getPayment: (token) => dispatch(getPayment(token)),
         })),
     ),
 )(Profile);

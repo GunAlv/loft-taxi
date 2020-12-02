@@ -1,5 +1,4 @@
 import {
-    GET_PAYMENT,
     GET_PAYMENT_DATA,
     GET_PAYMENT_STATUS,
     PAYMENT_SUCCESS_INFO_DISABLE,
@@ -29,11 +28,6 @@ export const paymentSuccessInfoDisable = () => ({
 
 export const removePaymentSuccessInfo = () => ({
     type: REMOVE_PAYMENT_SUCCESS_INFO,
-});
-
-export const getPayment = (token) => ({
-    type: GET_PAYMENT,
-    payload: token,
 });
 
 export const getPaymentData = ({ cardNumber, expiryDate, cardName, cvc }) => ({
