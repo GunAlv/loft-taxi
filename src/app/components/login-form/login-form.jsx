@@ -8,6 +8,11 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { setAuth } from '../../module/actions/auth';
 
+const propTypes = {
+    onChangeForm: PropTypes.func.isRequired,
+    setAuth: PropTypes.func.isRequired,
+};
+
 const LoginForm = ({ onChangeForm, setAuth }) => {
     const submit = (e) => {
         e.preventDefault();
@@ -73,6 +78,8 @@ const LoginForm = ({ onChangeForm, setAuth }) => {
         </FormAuthContainer>
     );
 }
+
+LoginForm.propTypes = propTypes;
 
 export default compose(
     connect(

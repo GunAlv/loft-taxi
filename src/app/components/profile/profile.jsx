@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Title } from '../title/style';
 import { FormBody, FormContainer, FormRow } from '../form/style';
 import { StyledTextField } from '../text-field/style';
@@ -12,6 +13,23 @@ import { pushPayment, paymentSuccessInfoDisable } from '../../module/actions/pay
 
 const NUMBER_LIMIT = 19;
 const DATE_LIMIT = 5;
+
+const propTypes = {
+    card: PropTypes.shape({
+        cardNumber: PropTypes.string,
+        cardName: PropTypes.string,
+        expiryDate: PropTypes.string,
+        cvc: PropTypes.string,
+    }).isRequired,
+    token: PropTypes.string.isRequired,
+    showSuccessInfo: PropTypes.bool,
+    pushPayment: PropTypes.func.isRequired,
+    paymentSuccessInfoDisable: PropTypes.func.isRequired,
+};
+
+const defaultProps = {
+    showSuccessInfo: false,
+};
 
 class Profile extends React.Component {
     state = {
@@ -182,6 +200,9 @@ class Profile extends React.Component {
         );
     }
 }
+
+Profile.propTypes = propTypes;
+Profile.defaultProps = defaultProps;
 
 export default compose(
     connect(

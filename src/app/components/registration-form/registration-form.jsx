@@ -8,6 +8,11 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { setRegister } from '../../module/actions/register';
 
+const propTypes = {
+    onChangeForm: PropTypes.func.isRequired,
+    setRegister: PropTypes.func.isRequired,
+};
+
 const RegistrationForm = ({ onChangeForm, setRegister }) => {
     const submit = (e) => {
         e.preventDefault();
@@ -90,6 +95,8 @@ const RegistrationForm = ({ onChangeForm, setRegister }) => {
         </FormAuthContainer>
     );
 }
+
+RegistrationForm.propTypes = propTypes;
 
 export default compose(
     connect(

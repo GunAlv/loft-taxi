@@ -6,6 +6,10 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { removeAuth } from '../../module/actions/auth';
 
+const propTypes = {
+    removeAuth: PropTypes.func.isRequired,
+};
+
 const Menu = ({ removeAuth }) => {
     const logout = (e) => {
         e.preventDefault();
@@ -44,6 +48,8 @@ const Menu = ({ removeAuth }) => {
         </MenuContainer>
     );
 };
+
+Menu.propTypes = propTypes;
 
 export default compose(
     connect(

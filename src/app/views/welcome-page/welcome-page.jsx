@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { WelcomePageBlock, WelcomePageContent } from './style';
 
 import AsideLogo from '../../components/aside-logo';
