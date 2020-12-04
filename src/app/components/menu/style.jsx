@@ -22,4 +22,9 @@ export const MenuLink = styled(Link)`
     font-size: 21px;
     line-height: 25px;
     color: ${p => p.theme.palette.primary.light};
+    
+    &.active {
+        text-decoration: none;
+        color: ${p => p.theme.palette.primary.main};
+    }
 `;

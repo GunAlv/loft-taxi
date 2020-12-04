@@ -1,19 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { MenuContainer, MenuList, MenuListItem, MenuLink } from './style';
-import { Link as RouteLink } from "react-router-dom";
+import { Link as RouteLink, withRouter } from "react-router-dom";
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { removeAuth } from '../../module/actions/auth';
 
 const propTypes = {
     removeAuth: PropTypes.func.isRequired,
+    location: PropTypes.shape({
+        pathname: PropTypes.string,
+    }).isRequired,
 };
 
-const Menu = ({ removeAuth }) => {
+const Menu = ({ removeAuth, location }) => {
     const logout = (e) => {
         e.preventDefault();
         removeAuth();
+    };
+
+    const isActive = (path) => {
+        return location.pathname === path && 'active';
     };
 
     return (
@@ -24,6 +31,7 @@ const Menu = ({ removeAuth }) => {
                 <MenuListItem>
                     <MenuLink
                         to='/map'
+                        className={isActive('/map')}
                         component={RouteLink}
                     >
                         Карта
@@ -32,6 +40,7 @@ const Menu = ({ removeAuth }) => {
                 <MenuListItem>
                     <MenuLink
                         to='/profile'
+                        className={isActive('/profile')}
                         component={RouteLink}
                     >
                         Профиль
@@ -58,4 +67,5 @@ export default compose(
             removeAuth: () => dispatch(removeAuth()),
         })),
     ),
+    withRouter,
 )(Menu);
