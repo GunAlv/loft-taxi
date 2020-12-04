@@ -12,6 +12,8 @@ export const Main = styled.main`
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
-    display: flex;
-    flex-direction: column;
+    
+    > section {
+        height: 100%;
+    }
 `;

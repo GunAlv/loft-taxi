@@ -5,7 +5,7 @@ import { FormBody, FormContainer, FormRow } from '../form/style';
 import { StyledTextField } from '../text-field/style';
 import { Button } from '@material-ui/core';
 import Card from '../card/card';
-import { ProfileAction, ProfileContainer, ProfileDescription, ProfileIntro } from './style';
+import { ProfileAction, ProfileContainer, ProfileContent, ProfileDescription, ProfileIntro } from './style';
 import { FormPaymentInner } from '../form/form-payment/style';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -114,93 +114,95 @@ class Profile extends React.Component {
             <ProfileContainer
                 data-testid="profile"
             >
-                <ProfileIntro>
-                    <Title variant="h1" component="h1">
-                        Профиль
-                    </Title>
-                    <ProfileDescription>
-                        {
-                            showSuccessInfo
-                                ? 'Платёжные данные обновлены. Теперь вы можете заказывать такси.'
-                                : 'Введите платежные данные'
-                        }
-                    </ProfileDescription>
-                </ProfileIntro>
+                <ProfileContent>
+                    <ProfileIntro>
+                        <Title variant="h1" component="h1">
+                            Профиль
+                        </Title>
+                        <ProfileDescription>
+                            {
+                                showSuccessInfo
+                                    ? 'Платёжные данные обновлены. Теперь вы можете заказывать такси.'
+                                    : 'Введите платежные данные'
+                            }
+                        </ProfileDescription>
+                    </ProfileIntro>
 
-                {
-                    showSuccessInfo ? (
-                        <ProfileAction>
-                            <Button
-                                variant="contained"
-                                onClick={this.removeSuccessInfo}
+                    {
+                        showSuccessInfo ? (
+                            <ProfileAction>
+                                <Button
+                                    variant="contained"
+                                    onClick={this.removeSuccessInfo}
+                                >
+                                    Перейти на карту
+                                </Button>
+                            </ProfileAction>
+                        ) : (
+                            <FormContainer
+                                data-testid="profile-form"
+                                onSubmit={this.submit}
                             >
-                                Перейти на карту
-                            </Button>
-                        </ProfileAction>
-                    ) : (
-                        <FormContainer
-                            data-testid="profile-form"
-                            onSubmit={this.submit}
-                        >
-                            <FormBody>
-                                <FormPaymentInner>
-                                    <FormRow>
-                                        <StyledTextField
-                                            type="text"
-                                            name="payment-name"
-                                            id="payment-name"
-                                            label="Имя владельца"
-                                            value={cardName}
-                                            onChange={this.changeName}
-                                        />
-                                    </FormRow>
-                                    <FormRow>
-                                        <StyledTextField
-                                            type="text"
-                                            name="payment-number"
-                                            id="payment-number"
-                                            label="Номер карты"
-                                            value={cardNumber}
-                                            onChange={this.changeNumber}
-                                        />
-                                    </FormRow>
-                                    <FormRow>
-                                        <StyledTextField
-                                            type="text"
-                                            name="payment-date"
-                                            id="payment-date"
-                                            label="MM/YY"
-                                            value={expiryDate}
-                                            onChange={this.changeDate}
-                                        />
-                                        <StyledTextField
-                                            type="text"
-                                            name="payment-cvc"
-                                            id="payment-cvc"
-                                            label="CVC"
-                                            value={cvc}
-                                            onChange={this.changeCVC}
-                                        />
-                                    </FormRow>
-                                </FormPaymentInner>
+                                <FormBody>
+                                    <FormPaymentInner>
+                                        <FormRow>
+                                            <StyledTextField
+                                                type="text"
+                                                name="payment-name"
+                                                id="payment-name"
+                                                label="Имя владельца"
+                                                value={cardName}
+                                                onChange={this.changeName}
+                                            />
+                                        </FormRow>
+                                        <FormRow>
+                                            <StyledTextField
+                                                type="text"
+                                                name="payment-number"
+                                                id="payment-number"
+                                                label="Номер карты"
+                                                value={cardNumber}
+                                                onChange={this.changeNumber}
+                                            />
+                                        </FormRow>
+                                        <FormRow>
+                                            <StyledTextField
+                                                type="text"
+                                                name="payment-date"
+                                                id="payment-date"
+                                                label="MM/YY"
+                                                value={expiryDate}
+                                                onChange={this.changeDate}
+                                            />
+                                            <StyledTextField
+                                                type="text"
+                                                name="payment-cvc"
+                                                id="payment-cvc"
+                                                label="CVC"
+                                                value={cvc}
+                                                onChange={this.changeCVC}
+                                            />
+                                        </FormRow>
+                                    </FormPaymentInner>
 
-                                <Card
-                                    number={cardNumber}
-                                    date={expiryDate}
-                                />
+                                    <Card
+                                        number={cardNumber}
+                                        date={expiryDate}
+                                    />
 
-                                <ProfileAction>
-                                    <Button
-                                        variant="contained"
-                                        type="submit"
-                                    >
-                                        Сохранить
-                                    </Button>
-                                </ProfileAction>
-                            </FormBody>
-                        </FormContainer>
-                    )
-                }
+                                    <ProfileAction>
+                                        <Button
+                                            variant="contained"
+                                            type="submit"
+                                        >
+                                            Сохранить
+                                        </Button>
+                                    </ProfileAction>
+                                </FormBody>
+                            </FormContainer>
+                        )
+                    }
+                </ProfileContent>
             </ProfileContainer>
         );
     }

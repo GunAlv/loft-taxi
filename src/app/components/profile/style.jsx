@@ -1,9 +1,14 @@
 import styled from 'styled-components';
 
 export const ProfileContainer = styled.section`
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+`;
+
+export const ProfileContent = styled.div`
     max-width: 880px;
     width: 100%;
-    margin: 0 auto;
     box-shadow: 0px 10px 20px -5px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     background-color: ${p => p.theme.palette.primary.light};
