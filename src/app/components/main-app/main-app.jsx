@@ -38,6 +38,7 @@ class MainApp extends React.PureComponent {
                     </Route>
                     <PrivateRoute exact path='/map' component={MapPage} isLoggedIn={isLoggedIn}/>
                     <PrivateRoute exact path='/profile' component={ProfilePage} isLoggedIn={isLoggedIn}/>
+                    <Redirect to='/'/>
                 </Switch>
             </MainLayout>
         );
