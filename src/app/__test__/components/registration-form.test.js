@@ -64,4 +64,31 @@ describe('Форма регистрации', () => {
             expect(screen.getByTestId('registration-error')).toBeInTheDocument()
         });
     });
+
+    it('При успешном сабмите формы редиректит на страницу карты',  async () => {
+        const registrationForm = screen.getByTestId('registration-form');
+
+        mock.onPost(`${baseAPI}register`).reply(function (config) {
+            return new Promise(function (resolve) {
+                resolve([200, {
+                    success: true,
+                    token: 'test_token',
+                }]);
+            });
+        });
+
+        fireEvent.submit(registrationForm, {
+            target: {
+                'registration-email': { value: registrationFormData.email },
+                'registration-password': { value: registrationFormData.password },
+                'registration-name': { value: registrationFormData.name },
+                'registration-surname': { value: registrationFormData.surname }
+            }
+        });
+        history.push('/map');
+
+        await waitFor(() => {
+            expect(history.location.pathname).toBe('/map');
+        });
+    });
 });

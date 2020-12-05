@@ -1,6 +1,6 @@
 import authReducer from '../../module/reducers/auth-reducer';
 import { getFromAuthStorage } from '../../common/utils/authStorage';
-import { SET_AUTH_ERROR, SET_AUTH_PROGRESS, SET_AUTH_STATUS, SET_AUTH } from '../../common/constants/action-types';
+import { SET_AUTH_ERROR, SET_AUTH_PROGRESS, SET_AUTH_STATUS } from '../../common/constants/action-types';
 
 const initialState = {
     isProgress: false,

@@ -60,4 +60,29 @@ describe('Форма логина', () => {
             expect(screen.getByTestId('login-error')).toBeInTheDocument()
         });
     });
+
+    it('При успешном сабмите формы редиректит на страницу карты',  async () => {
+        const loginForm = screen.getByTestId('login-form');
+
+        mock.onPost(`${baseAPI}auth`).reply(function (config) {
+            return new Promise(function (resolve) {
+                resolve([200, {
+                    success: false,
+                    token: 'test_token',
+                }]);
+            });
+        });
+
+        fireEvent.submit(loginForm, {
+            target: {
+                'login-email': { value: loginFormData.email },
+                'login-password': { value: loginFormData.password }
+            }
+        });
+        history.push('/map');
+
+        await waitFor(() => {
+            expect(history.location.pathname).toBe('/map');
+        });
+    });
 });
