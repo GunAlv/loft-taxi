@@ -9,9 +9,10 @@ export const setAuthStorage = (isLoggedIn, token) => {
 
 export const getFromAuthStorage = (value) => {
     const storage = JSON.parse(localStorage.getItem(LOFT_TAXI_AUTH_STORAGE));
-    return storage ? storage[value] : undefined;
+    return storage?.[value];
 };
 
 export const deleteAuthStorage = () => {
-    return localStorage.removeItem(LOFT_TAXI_AUTH_STORAGE);
+    const storage = JSON.parse(localStorage.getItem(LOFT_TAXI_AUTH_STORAGE));
+    if (storage) return localStorage.removeItem(LOFT_TAXI_AUTH_STORAGE);
 };
