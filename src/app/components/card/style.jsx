@@ -7,10 +7,9 @@ export const CardContainer = styled.div`
     border-radius: 10px;
     max-width: 347px;
     width: 100%;
-    padding: 18px 16px 18px 24px;
+    padding: 18px 16px 75px 24px;
     background-color: ${p => p.theme.palette.primary.light};
     align-self: flex-start;
-    padding-bottom: 75px;
     margin-left: auto;
     position: relative;
     min-height: 182px;
