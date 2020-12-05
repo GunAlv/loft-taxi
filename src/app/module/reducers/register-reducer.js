@@ -1,4 +1,4 @@
-import { GET_REGISTER_ERROR } from '../../common/constants/action-types';
+import { SET_REGISTER_ERROR } from '../../common/constants/action-types';
 
 const initialState = {
     registerError: '',
@@ -6,7 +6,7 @@ const initialState = {
 
 const registerReducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_REGISTER_ERROR:
+        case SET_REGISTER_ERROR:
             return {
                 ...state,
                 registerError: action.payload,

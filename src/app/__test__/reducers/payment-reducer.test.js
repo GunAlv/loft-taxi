@@ -1,8 +1,8 @@
 import paymentReducer from '../../module/reducers/payment-reducer';
 import { getFromPaymentStorage } from '../../common/utils/paymentStorage';
 import {
-    GET_PAYMENT_DATA,
-    GET_PAYMENT_STATUS,
+    SET_PAYMENT_DATA,
+    SET_PAYMENT_STATUS,
     PAYMENT_SUCCESS_INFO_DISABLE,
     REMOVE_PAYMENT_SUCCESS_INFO
 } from '../../common/constants/action-types';
@@ -27,10 +27,10 @@ describe('Payment Reducer', () => {
             })
     });
 
-    it('Should handle GET_PAYMENT_STATUS', () => {
+    it('Should handle SET_PAYMENT_STATUS', () => {
         expect(
             paymentReducer(undefined, {
-                type: GET_PAYMENT_STATUS,
+                type: SET_PAYMENT_STATUS,
                 payload: true,
             }))
             .toEqual({
@@ -41,7 +41,7 @@ describe('Payment Reducer', () => {
 
         expect(
             paymentReducer(undefined, {
-                type: GET_PAYMENT_STATUS,
+                type: SET_PAYMENT_STATUS,
                 payload: false,
             }))
             .toEqual({
@@ -62,10 +62,10 @@ describe('Payment Reducer', () => {
             })
     });
 
-    it('Should handle GET_PAYMENT_DATA', () => {
+    it('Should handle SET_PAYMENT_DATA', () => {
         expect(
             paymentReducer(undefined, {
-                type: GET_PAYMENT_DATA,
+                type: SET_PAYMENT_DATA,
                 payload: {
                     cardNumber: '333',
                     expiryDate: '12/23',

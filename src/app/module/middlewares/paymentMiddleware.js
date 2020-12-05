@@ -4,7 +4,7 @@ import {
     PAYMENT_SUCCESS_INFO_DISABLE,
     PUSH_PAYMENT,
 } from '../../common/constants/action-types';
-import { getPaymentData, getPaymentStatus, removePaymentSuccessInfo } from '../actions/payment';
+import { setPaymentData, setPaymentStatus, removePaymentSuccessInfo } from '../actions/payment';
 import { setPaymentStorage } from '../../common/utils/paymentStorage';
 
 export const paymentMiddleware = store => next => action => {
@@ -14,18 +14,18 @@ export const paymentMiddleware = store => next => action => {
                 const { data } = response;
 
                 if (!data.success) {
-                    store.dispatch(getPaymentStatus(false));
+                    store.dispatch(setPaymentStatus(false));
 
                     return;
                 }
 
-                store.dispatch(getPaymentStatus(true));
-                store.dispatch(getPaymentData(action.payload));
+                store.dispatch(setPaymentStatus(true));
+                store.dispatch(setPaymentData(action.payload));
                 setPaymentStorage(action.payload);
             })
             .catch(error => {
                 console.log(error);
-                store.dispatch(getPaymentStatus(false));
+                store.dispatch(setPaymentStatus(false));
             })
 
     }

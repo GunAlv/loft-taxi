@@ -1,5 +1,5 @@
 import registerReducer from '../../module/reducers/register-reducer';
-import { GET_REGISTER_ERROR } from '../../common/constants/action-types';
+import { SET_REGISTER_ERROR } from '../../common/constants/action-types';
 
 const initialState = {
     registerError: '',
@@ -14,10 +14,10 @@ describe('Register Reducer', () => {
            })
    });
 
-   it('Should handle GET_REGISTER_ERROR', () => {
+   it('Should handle SET_REGISTER_ERROR', () => {
        expect(
            registerReducer(undefined, {
-               type: GET_REGISTER_ERROR,
+               type: SET_REGISTER_ERROR,
                payload: 'Вот опять ошибка',
            }))
            .toEqual({

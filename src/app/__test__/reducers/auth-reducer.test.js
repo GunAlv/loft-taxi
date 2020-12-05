@@ -1,6 +1,6 @@
 import authReducer from '../../module/reducers/auth-reducer';
 import { getFromAuthStorage } from '../../common/utils/authStorage';
-import { GET_AUTH_ERROR, GET_AUTH_PROGRESS, GET_AUTH_STATUS, SET_AUTH } from '../../common/constants/action-types';
+import { SET_AUTH_ERROR, SET_AUTH_PROGRESS, SET_AUTH_STATUS, SET_AUTH } from '../../common/constants/action-types';
 
 const initialState = {
     isProgress: false,
@@ -18,10 +18,10 @@ describe('Auth Reducer', () => {
                 })
     });
 
-    it('Should handle GET_AUTH_PROGRESS', () => {
+    it('Should handle SET_AUTH_PROGRESS', () => {
         expect(
             authReducer(undefined, {
-                type: GET_AUTH_PROGRESS,
+                type: SET_AUTH_PROGRESS,
                 payload: true,
             }))
             .toEqual({
@@ -31,7 +31,7 @@ describe('Auth Reducer', () => {
 
         expect(
             authReducer(undefined, {
-                type: GET_AUTH_PROGRESS,
+                type: SET_AUTH_PROGRESS,
                 payload: false,
             }))
             .toEqual({
@@ -40,10 +40,10 @@ describe('Auth Reducer', () => {
             })
     });
 
-    it('Should handle GET_AUTH_STATUS', () => {
+    it('Should handle SET_AUTH_STATUS', () => {
         expect(
             authReducer(undefined, {
-                type: GET_AUTH_STATUS,
+                type: SET_AUTH_STATUS,
                 payload: {
                     isLoggedIn: true,
                     token: 'feu37',
@@ -57,7 +57,7 @@ describe('Auth Reducer', () => {
 
         expect(
             authReducer(undefined, {
-                type: GET_AUTH_STATUS,
+                type: SET_AUTH_STATUS,
                 payload: {
                     isLoggedIn: false,
                     token: 'token',
@@ -70,10 +70,10 @@ describe('Auth Reducer', () => {
             })
     });
 
-    it('Should handle GET_AUTH_ERROR', () => {
+    it('Should handle SET_AUTH_ERROR', () => {
         expect(
             authReducer(undefined, {
-                type: GET_AUTH_ERROR,
+                type: SET_AUTH_ERROR,
                 payload: 'Ошибка!',
             }))
             .toEqual({

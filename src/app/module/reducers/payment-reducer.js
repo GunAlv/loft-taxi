@@ -1,6 +1,6 @@
 import {
-    GET_PAYMENT_DATA,
-    GET_PAYMENT_STATUS,
+    SET_PAYMENT_DATA,
+    SET_PAYMENT_STATUS,
     REMOVE_PAYMENT_SUCCESS_INFO
 } from '../../common/constants/action-types';
 import { getFromPaymentStorage } from '../../common/utils/paymentStorage';
@@ -18,7 +18,7 @@ const initialState = {
 
 const paymentReducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_PAYMENT_STATUS:
+        case SET_PAYMENT_STATUS:
             return {
                 ...state,
                 isFetched: action.payload,
@@ -31,7 +31,7 @@ const paymentReducer = (state = initialState, action) => {
                 showSuccessInfo: false,
             };
 
-        case GET_PAYMENT_DATA:
+        case SET_PAYMENT_DATA:
             return {
                 ...state,
                 card: action.payload,

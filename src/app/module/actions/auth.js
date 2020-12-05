@@ -1,8 +1,9 @@
 import {
     SET_AUTH,
-    GET_AUTH_PROGRESS,
-    GET_AUTH_STATUS,
-    REMOVE_AUTH, GET_AUTH_ERROR,
+    SET_AUTH_PROGRESS,
+    SET_AUTH_STATUS,
+    SET_AUTH_ERROR,
+    REMOVE_AUTH,
 } from '../../common/constants/action-types';
 
 export const setAuth = (email, password) => ({
@@ -13,21 +14,21 @@ export const setAuth = (email, password) => ({
     },
 });
 
-export const getAuthProgress = (isProgress) => ({
-    type: GET_AUTH_PROGRESS,
+export const setAuthProgress = (isProgress) => ({
+    type: SET_AUTH_PROGRESS,
     payload: isProgress,
 });
 
-export const getAuthStatus = (isLoggedIn, token) => ({
-    type: GET_AUTH_STATUS,
+export const setAuthStatus = (isLoggedIn, token) => ({
+    type: SET_AUTH_STATUS,
     payload: {
         isLoggedIn,
         token: token,
     },
 });
 
-export const getAuthError = (error) => ({
-    type: GET_AUTH_ERROR,
+export const setAuthError = (error) => ({
+    type: SET_AUTH_ERROR,
     payload: error,
 });
 

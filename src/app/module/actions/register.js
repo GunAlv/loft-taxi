@@ -1,5 +1,5 @@
 import {
-    GET_REGISTER_ERROR,
+    SET_REGISTER_ERROR,
     SET_REGISTER
 } from '../../common/constants/action-types';
 
@@ -13,7 +13,7 @@ export const setRegister = (email, password, name, surname) => ({
     },
 });
 
-export const getRegisterError = (error) => ({
-    type: GET_REGISTER_ERROR,
+export const setRegisterError = (error) => ({
+    type: SET_REGISTER_ERROR,
     payload: error,
 });

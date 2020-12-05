@@ -1,7 +1,7 @@
 import {
-    GET_AUTH_ERROR,
-    GET_AUTH_PROGRESS,
-    GET_AUTH_STATUS,
+    SET_AUTH_ERROR,
+    SET_AUTH_PROGRESS,
+    SET_AUTH_STATUS,
 } from '../../common/constants/action-types';
 import { getFromAuthStorage } from '../../common/utils/authStorage';
 
@@ -14,20 +14,20 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_AUTH_PROGRESS:
+        case SET_AUTH_PROGRESS:
             return {
                 ...state,
                 isProgress: action.payload,
             };
 
-        case GET_AUTH_STATUS:
+        case SET_AUTH_STATUS:
             return {
                 ...state,
                 isLoggedIn: action.payload.isLoggedIn,
                 token: action.payload.token,
             };
 
-        case GET_AUTH_ERROR:
+        case SET_AUTH_ERROR:
             return {
                 ...state,
                 authError: action.payload,

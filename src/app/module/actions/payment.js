@@ -1,6 +1,6 @@
 import {
-    GET_PAYMENT_DATA,
-    GET_PAYMENT_STATUS,
+    SET_PAYMENT_DATA,
+    SET_PAYMENT_STATUS,
     PAYMENT_SUCCESS_INFO_DISABLE,
     PUSH_PAYMENT,
     REMOVE_PAYMENT_SUCCESS_INFO
@@ -17,8 +17,8 @@ export const pushPayment = (cardNumber, expiryDate, cardName, cvc, token) => ({
     },
 });
 
-export const getPaymentStatus = (isFetched) => ({
-    type: GET_PAYMENT_STATUS,
+export const setPaymentStatus = (isFetched) => ({
+    type: SET_PAYMENT_STATUS,
     payload: isFetched,
 });
 
@@ -30,8 +30,8 @@ export const removePaymentSuccessInfo = () => ({
     type: REMOVE_PAYMENT_SUCCESS_INFO,
 });
 
-export const getPaymentData = ({ cardNumber, expiryDate, cardName, cvc }) => ({
-    type: GET_PAYMENT_DATA,
+export const setPaymentData = ({ cardNumber, expiryDate, cardName, cvc }) => ({
+    type: SET_PAYMENT_DATA,
     payload: {
         cardNumber,
         expiryDate,
