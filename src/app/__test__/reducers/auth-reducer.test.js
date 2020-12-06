@@ -5,7 +5,7 @@ import { SET_AUTH_ERROR, SET_AUTH_PROGRESS, SET_AUTH_STATUS } from '../../common
 const initialState = {
     isProgress: false,
     isLoggedIn: getFromAuthStorage('isLoggedIn') || false,
-    token: getFromAuthStorage('token') || undefined,
+    token: getFromAuthStorage('token') || null,
     authError: '',
 };
 

@@ -8,7 +8,7 @@ import { getFromAuthStorage } from '../../common/utils/authStorage';
 const initialState = {
     isProgress: false,
     isLoggedIn: getFromAuthStorage('isLoggedIn') || false,
-    token: getFromAuthStorage('token') || undefined,
+    token: getFromAuthStorage('token') || null,
     authError: '',
 };
 
