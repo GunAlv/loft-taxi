@@ -9,6 +9,7 @@ export const theme = createMuiTheme({
         },
         secondary: {
             main: '#828282',
+            error: '#FF0000',
         },
     },
     overrides: {
@@ -67,6 +68,10 @@ export const theme = createMuiTheme({
         },
     },
     typography: {
+        h1: {
+            fontSize: '36px',
+            lineHeight: '42px',
+        },
         h2: {
             fontSize: '30px',
             lineHeight: '35px',

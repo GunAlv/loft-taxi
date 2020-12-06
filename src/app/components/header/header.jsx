@@ -1,23 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { HeaderContainer } from './style';
 
 import Logo from '../logo';
 import Menu from '../menu';
 
-const propTypes = {
-    onChangePage: PropTypes.func,
-};
-
-const Header = ({ onChangePage }) => {
+const Header = () => {
     return (
         <HeaderContainer>
             <Logo/>
-            <Menu onChangePage={onChangePage}/>
+            <Menu/>
         </HeaderContainer>
     );
 };
-
-Header.propTypes = propTypes;
 
 export default Header;

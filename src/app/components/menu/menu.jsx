@@ -1,14 +1,20 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 import { MenuContainer, MenuList, MenuListItem, MenuLink } from './style';
-import { AuthContext } from '../../common/providers/auth-provider';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { removeAuth } from '../../module/actions/auth';
 
 const propTypes = {
-    onChangePage: PropTypes.func,
+    removeAuth: PropTypes.func.isRequired,
 };
 
-const Menu = ({ onChangePage }) => {
-    const { logout } = useContext(AuthContext);
+const Menu = ({ removeAuth }) => {
+    const logout = (e) => {
+        e.preventDefault();
+        removeAuth();
+    };
 
     return (
         <MenuContainer
@@ -17,16 +23,18 @@ const Menu = ({ onChangePage }) => {
             <MenuList>
                 <MenuListItem>
                     <MenuLink
-                        data-mock-url="map-page"
-                        onClick={(e) => onChangePage(e.currentTarget.dataset.mockUrl)}
+                        to='/map'
+                        activeClassName='active'
+                        component={NavLink}
                     >
                         Карта
                     </MenuLink>
                 </MenuListItem>
                 <MenuListItem>
                     <MenuLink
-                        data-mock-url="profile-page"
-                        onClick={(e) => onChangePage(e.currentTarget.dataset.mockUrl)}
+                        to='/profile'
+                        activeClassName='active'
+                        component={NavLink}
                     >
                         Профиль
                     </MenuLink>
@@ -45,4 +53,11 @@ const Menu = ({ onChangePage }) => {
 
 Menu.propTypes = propTypes;
 
-export default Menu;
+export default compose(
+    connect(
+        null,
+        (dispatch => ({
+            removeAuth: () => dispatch(removeAuth()),
+        })),
+    ),
+)(Menu);

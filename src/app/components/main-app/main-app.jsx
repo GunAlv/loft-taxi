@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 
 import MainLayout from '../main-layout';
 
@@ -7,37 +10,35 @@ import WelcomePage from '../../views/welcome-page';
 import MapPage from '../../views/map-page';
 import ProfilePage from '../../views/profile-page';
 
-import withAuth from '../../common/HOCs/withAuth';
+const PrivateRoute = ({ component: Component, isLoggedIn, ...rest }) => (
+    <Route
+        {...rest}
+        render={(props) => (
+            isLoggedIn
+                ? <Component {...props} />
+                : <Redirect to={{ pathname: '/'}} />
+        )}
+    />
+);
 
 const propTypes = {
     isLoggedIn: PropTypes.bool.isRequired,
 };
 
-class MainApp extends React.Component {
-    state = {
-        page: 'welcome-page',
-    };
-
-    setPage = (page) => {
-        this.setState({ page });
-    };
-
+class MainApp extends React.PureComponent {
     render() {
         const { isLoggedIn } = this.props;
-        const { page } = this.state;
-
-        const PAGES = {
-            'welcome-page': <WelcomePage onChangePage={this.setPage}/>,
-            'map-page': isLoggedIn ? <MapPage/> : <WelcomePage onChangePage={this.setPage}/>,
-            'profile-page': isLoggedIn ? <ProfilePage/> : <WelcomePage onChangePage={this.setPage}/>
-        };
 
         return (
-            <MainLayout
-                page={page}
-                onChangePage={this.setPage}
-            >
-                { PAGES[page] }
+            <MainLayout isLoggedIn={isLoggedIn}>
+                <Switch>
+                    <Route exact path='/'>
+                        { isLoggedIn ? <Redirect to='/map' /> : <WelcomePage/> }
+                    </Route>
+                    <PrivateRoute exact path='/map' component={MapPage} isLoggedIn={isLoggedIn}/>
+                    <PrivateRoute exact path='/profile' component={ProfilePage} isLoggedIn={isLoggedIn}/>
+                    <Redirect to='/'/>
+                </Switch>
             </MainLayout>
         );
     };
@@ -45,4 +46,12 @@ class MainApp extends React.Component {
 
 MainApp.propTypes = propTypes;
 
-export default withAuth(MainApp);
+export default compose(
+    connect(
+        (state => ({
+            isLoggedIn: state.authReducer.isLoggedIn,
+        })),
+        null,
+    ),
+    withRouter,
+)(MainApp)

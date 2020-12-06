@@ -4,19 +4,14 @@ import { Container, Main } from './style';
 import Header from '../header';
 
 const propTypes = {
-    page: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
-    onChangePage: PropTypes.func,
+    isLoggedIn: PropTypes.bool.isRequired,
 };
 
-const MainLayout = ({ page, children, onChangePage }) => {
+const MainLayout = ({ children, isLoggedIn }) => {
     return (
         <Container>
-            {
-                page !== 'welcome-page' && (
-                    <Header onChangePage={onChangePage}/>
-                )
-            }
+            { isLoggedIn && <Header/> }
             <Main>
                 { children }
             </Main>

@@ -1,22 +1,34 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { StyledTextField } from '../text-field/style';
 import { Link } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import { FormAuthContainer, FormAuthRow, FormAuthRowLink, FormAuthRowAction, FormAuthRowNotice } from '../form/form-auth/style';
-import { AuthContext } from '../../common/providers/auth-provider';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { setAuth } from '../../module/actions/auth';
+import ErrorLabel from '../error-label';
 
 const propTypes = {
-    onChangePage: PropTypes.func,
+    onChangeForm: PropTypes.func.isRequired,
+    setAuth: PropTypes.func.isRequired,
+    authError: PropTypes.string.isRequired,
 };
 
-const LoginForm = ({ onChangePage }) => {
-    const { login } = useContext(AuthContext);
-
+const LoginForm = ({ onChangeForm, setAuth, authError }) => {
     const submit = (e) => {
         e.preventDefault();
-        login();
-        onChangePage('map-page');
+
+        const email = e.target['login-email'].value;
+        const password = e.target['login-password'].value;
+
+        setAuth(email, password)
+    };
+
+    const changeForm = (e) => {
+        e.preventDefault();
+
+        onChangeForm('registration');
     };
 
     return (
@@ -24,9 +36,10 @@ const LoginForm = ({ onChangePage }) => {
             data-testid="login-form"
             onSubmit={submit}
         >
+            { authError && (<ErrorLabel data-testid="login-error">{authError}</ErrorLabel>) }
             <FormAuthRow>
                 <StyledTextField
-                    type="text"
+                    type="email"
                     name="login-email"
                     id="login-email"
                     placeholder="mail@mail.ru"
@@ -59,7 +72,9 @@ const LoginForm = ({ onChangePage }) => {
             </FormAuthRowAction>
             <FormAuthRowNotice>
                 <span>Новый пользователь?</span>
-                <Link>
+                <Link
+                    onClick={changeForm}
+                >
                     Регистрация
                 </Link>
             </FormAuthRowNotice>
@@ -69,4 +84,13 @@ const LoginForm = ({ onChangePage }) => {
 
 LoginForm.propTypes = propTypes;
 
-export default LoginForm;
+export default compose(
+    connect(
+        (state => ({
+            authError: state.authReducer.authError,
+        })),
+        (dispatch => ({
+            setAuth: (email, password) => dispatch(setAuth(email, password)),
+        })),
+    ),
+)(LoginForm);
