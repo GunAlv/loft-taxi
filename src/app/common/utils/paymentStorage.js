@@ -1,4 +1,4 @@
-import { LOFT_TAXI_PAYMENT_STORAGE } from '../constants/loft-taxi-payment-storage'
+import { LOFT_TAXI_PAYMENT_STORAGE } from '../constants/storage';
 
 export const setPaymentStorage = (paymentInfo) => {
     return localStorage.setItem(LOFT_TAXI_PAYMENT_STORAGE, JSON.stringify({

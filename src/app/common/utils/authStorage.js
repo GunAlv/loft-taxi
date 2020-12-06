@@ -1,4 +1,4 @@
-import { LOFT_TAXI_AUTH_STORAGE } from '../constants/loft-taxi-auth-storage'
+import { LOFT_TAXI_AUTH_STORAGE } from '../constants/storage';
 
 export const setAuthStorage = (isLoggedIn, token) => {
     return localStorage.setItem(LOFT_TAXI_AUTH_STORAGE, JSON.stringify({
