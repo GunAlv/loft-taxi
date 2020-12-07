@@ -19,7 +19,10 @@ export function* pushPaymentSaga(action) {
         if (data.success) {
             yield put(setPaymentStatus(true));
             yield put(setPaymentData(action.payload));
-            yield setPaymentStorage(action.payload);
+            yield setPaymentStorage({
+                ...action.payload,
+                isFilled: true,
+            });
         } else {
             console.error(data.error);
             yield put(setPaymentStatus(false));
