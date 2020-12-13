@@ -1,19 +1,10 @@
-import axios from 'axios';
-import { baseAPI } from '../../common/constants/baseAPI';
+import { fetchRegister } from '../API';
 import { call, put } from 'redux-saga/effects';
 import { setAuthProgress, setAuthStatus } from '../actions/auth';
 import { deletePaymentStorage } from '../../common/utils/paymentStorage';
 import { setPaymentData } from '../actions/payment';
 import { setAuthStorage } from '../../common/utils/authStorage';
 import { setRegisterError } from '../actions/register';
-
-function fetchRegister(data) {
-    return axios({
-        method: 'POST',
-        url: `${baseAPI}register`,
-        data,
-    })
-}
 
 export function* setRegisterSaga(action) {
     try {

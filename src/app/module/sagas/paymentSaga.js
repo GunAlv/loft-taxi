@@ -1,16 +1,7 @@
-import axios from 'axios';
-import { baseAPI } from '../../common/constants/baseAPI';
+import { fetchPayment } from '../API';
 import { call, put } from 'redux-saga/effects';
 import { removePaymentSuccessInfo, setPaymentData, setPaymentStatus } from '../actions/payment';
 import { setPaymentStorage } from '../../common/utils/paymentStorage';
-
-function fetchPayment(data) {
-    return axios({
-        method: 'POST',
-        url: `${baseAPI}card`,
-        data,
-    })
-}
 
 export function* pushPaymentSaga(action) {
     try {

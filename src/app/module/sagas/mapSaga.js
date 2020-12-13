@@ -1,25 +1,6 @@
-import axios from 'axios';
-import { baseAPI } from '../../common/constants/baseAPI';
+import { fetchAddressList, fetchRoute } from '../API';
 import { call, put } from 'redux-saga/effects';
 import { setAddressList, setAddressProgress, setRouteCoords } from '../actions/map';
-
-function fetchAddressList() {
-    return axios({
-        method: 'GET',
-        url: `${baseAPI}addressList`,
-    })
-}
-
-function fetchRoute({ addressFrom, addressTo }) {
-    return axios({
-        method: 'GET',
-        url: `${baseAPI}route`,
-        params: {
-            address1: addressFrom,
-            address2: addressTo,
-        },
-    })
-}
 
 export function* setAddressSaga(action) {
     try {

@@ -1,17 +1,8 @@
-import axios from 'axios';
-import { baseAPI } from '../../common/constants/baseAPI';
+import { fetchAuth } from '../API';
 import { call, put } from 'redux-saga/effects';
 import { setAuthError, setAuthProgress, setAuthStatus } from '../actions/auth';
 import { deleteAuthStorage, setAuthStorage } from '../../common/utils/authStorage';
 import { setRegisterError } from '../actions/register';
-
-function fetchAuth(data) {
-    return axios({
-        method: 'POST',
-        url: `${baseAPI}auth`,
-        data,
-    });
-}
 
 export function* setAuthSaga(action) {
     try {
