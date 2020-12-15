@@ -40,7 +40,9 @@ class MapForm extends React.Component {
         const isDisabled = (!addressFrom.length || !addressTo.length);
 
         return (
-            <MapFormContainer>
+            <MapFormContainer
+                data-testid="map-form"
+            >
                 <FormContainer
                     onSubmit={this.submit}
                 >
@@ -48,7 +50,10 @@ class MapForm extends React.Component {
                         <NativeSelect
                             value={addressFrom}
                             name="addressFrom"
-                            inputProps={{ 'aria-label': 'addressFrom' }}
+                            inputProps={{
+                                'aria-label': 'addressFrom',
+                                'data-testid': 'select-from',
+                            }}
                             onChange={this.handleChangeFrom}
                         >
                             <option
@@ -59,6 +64,7 @@ class MapForm extends React.Component {
                             </option>
                             {addressList.map(address => (
                                 <option
+                                    data-testid="select-option-from"
                                     key={address}
                                     value={address}
                                     disabled={address === addressTo}
@@ -72,7 +78,10 @@ class MapForm extends React.Component {
                         <NativeSelect
                             value={addressTo}
                             name="addressTo"
-                            inputProps={{ 'aria-label': 'addressTo' }}
+                            inputProps={{
+                                'aria-label': 'addressTo',
+                                'data-testid': 'select-to',
+                            }}
                             onChange={this.handleChangeTo}
                         >
                             <option
@@ -83,6 +92,7 @@ class MapForm extends React.Component {
                             </option>
                             {addressList.map(address => (
                                 <option
+                                    data-testid="select-option-to"
                                     key={address}
                                     value={address}
                                     disabled={address === addressFrom}
@@ -93,6 +103,7 @@ class MapForm extends React.Component {
                         </NativeSelect>
                     </MapFormControl>
                     <Button
+                        data-testid="map-form-button"
                         variant="contained"
                         type="submit"
                         disabled={isDisabled}
