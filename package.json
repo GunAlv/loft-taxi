@@ -42,10 +42,16 @@
       "last 1 safari version"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-push": "set CI=true&&npm test"
+    }
+  },
   "devDependencies": {
+    "axios-mock-adapter": "^1.19.0",
     "history": "^5.0.0",
+    "husky": "4.3.6",
     "prop-types": "15.7.2",
-    "styled-components": "5.2.1",
-    "axios-mock-adapter": "^1.19.0"
+    "styled-components": "5.2.1"
   }
 }
