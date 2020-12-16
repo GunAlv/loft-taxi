@@ -4,7 +4,7 @@ import { baseAPI } from '../../common/constants/baseAPI';
 import { recordSaga } from '../../common/helpers/recordSaga';
 import { setAddressSaga, setRouteSaga } from '../../module/sagas/mapSaga';
 
-import { setAddress, setAddressList, setAddressProgress, setRoute, setRouteCoords } from '../../module/actions/map';
+import { setAddress, setAddressList, setAddressLoading, setRoute, setRouteCoords } from '../../module/actions/map';
 
 const mock = new MockAdapter(axios);
 
@@ -36,8 +36,8 @@ describe('mapSaga', () => {
         );
 
         expect(dispatched).toEqual([
-            setAddressProgress(true),
-            setAddressProgress(false),
+            setAddressLoading(true),
+            setAddressLoading(false),
             setAddressList(response.addresses),
         ]);
     });

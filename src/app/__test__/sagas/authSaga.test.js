@@ -4,7 +4,7 @@ import { baseAPI } from '../../common/constants/baseAPI';
 import { recordSaga } from '../../common/helpers/recordSaga';
 import { removeAuthSaga, setAuthSaga } from '../../module/sagas/authSaga';
 
-import { removeAuth, setAuth, setAuthError, setAuthProgress, setAuthStatus } from '../../module/actions/auth';
+import { removeAuth, setAuth, setAuthError, setAuthLoading, setAuthStatus } from '../../module/actions/auth';
 import { setRegisterError } from '../../module/actions/register';
 
 const mock = new MockAdapter(axios);
@@ -37,8 +37,8 @@ describe('authSaga', () => {
        );
 
        expect(dispatched).toEqual([
-           setAuthProgress(true),
-           setAuthProgress(false),
+           setAuthLoading(true),
+           setAuthLoading(false),
            setAuthStatus(true, response.token)
        ]);
    });
@@ -61,8 +61,8 @@ describe('authSaga', () => {
         );
 
         expect(dispatched).toEqual([
-            setAuthProgress(true),
-            setAuthProgress(false),
+            setAuthLoading(true),
+            setAuthLoading(false),
             setAuthStatus(false),
             setAuthError(response.error),
         ]);

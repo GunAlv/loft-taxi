@@ -1,6 +1,6 @@
 import { fetchRegister } from '../API';
 import { call, put } from 'redux-saga/effects';
-import { setAuthProgress, setAuthStatus } from '../actions/auth';
+import { setAuthLoading, setAuthStatus } from '../actions/auth';
 import { deletePaymentStorage } from '../../common/utils/paymentStorage';
 import { setPaymentData } from '../actions/payment';
 import { setAuthStorage } from '../../common/utils/authStorage';
@@ -10,7 +10,7 @@ export function* setRegisterSaga(action) {
     try {
         const { data } = yield call(fetchRegister, action.payload);
 
-        yield put(setAuthProgress(false));
+        yield put(setAuthLoading(false));
 
         if (data.success) {
             yield deletePaymentStorage();
@@ -30,7 +30,7 @@ export function* setRegisterSaga(action) {
         }
     } catch(error) {
         console.log(error);
-        yield put(setAuthProgress(false));
+        yield put(setAuthLoading(false));
         yield put(setAuthStatus(false));
 
         throw new Error('Нет соединения с сервером!');

@@ -1,10 +1,10 @@
-import { SET_ADDRESS_LIST, SET_ADDRESS_PROGRESS, SET_ROUTE_COORDS } from '../../common/constants/action-types';
+import { SET_ADDRESS_LIST, SET_ADDRESS_LOADING, SET_ROUTE_COORDS } from '../../common/constants/action-types';
 
 const initialState = {
     addressList: [],
     routeCoords: [],
     isFetched: false,
-    isProgress: false,
+    isLoading: false,
 };
 
 const mapReducer = (state = initialState, action) => {
@@ -20,10 +20,10 @@ const mapReducer = (state = initialState, action) => {
                 ...state,
                 routeCoords: action.payload,
             };
-        case SET_ADDRESS_PROGRESS:
+        case SET_ADDRESS_LOADING:
             return {
               ...state,
-              isProgress: action.payload,
+              isLoading: action.payload,
             };
         default:
             return state;

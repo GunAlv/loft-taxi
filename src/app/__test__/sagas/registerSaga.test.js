@@ -6,7 +6,7 @@ import { recordSaga } from '../../common/helpers/recordSaga';
 import { setPaymentData } from '../../module/actions/payment';
 import { setRegister, setRegisterError } from '../../module/actions/register';
 import { setRegisterSaga } from '../../module/sagas/registerSaga';
-import { setAuthProgress, setAuthStatus } from '../../module/actions/auth';
+import { setAuthLoading, setAuthStatus } from '../../module/actions/auth';
 
 const mock = new MockAdapter(axios);
 
@@ -47,7 +47,7 @@ describe('registerSaga', () => {
         );
 
         expect(dispatched).toEqual([
-            setAuthProgress(false),
+            setAuthLoading(false),
             setPaymentData(emptyCard),
             setRegisterError(''),
             setAuthStatus(true, response.token),
@@ -72,7 +72,7 @@ describe('registerSaga', () => {
         );
 
         expect(dispatched).toEqual([
-            setAuthProgress(false),
+            setAuthLoading(false),
             setAuthStatus(false),
             setRegisterError(response.error),
         ]);

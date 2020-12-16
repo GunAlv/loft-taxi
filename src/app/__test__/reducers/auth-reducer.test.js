@@ -1,9 +1,9 @@
 import authReducer from '../../module/reducers/auth-reducer';
 import { getFromAuthStorage } from '../../common/utils/authStorage';
-import { SET_AUTH_ERROR, SET_AUTH_PROGRESS, SET_AUTH_STATUS } from '../../common/constants/action-types';
+import { SET_AUTH_ERROR, SET_AUTH_LOADING, SET_AUTH_STATUS } from '../../common/constants/action-types';
 
 const initialState = {
-    isProgress: false,
+    isLoading: false,
     isLoggedIn: getFromAuthStorage('isLoggedIn') || false,
     token: getFromAuthStorage('token') || null,
     authError: '',
@@ -18,25 +18,25 @@ describe('Auth Reducer', () => {
                 })
     });
 
-    it('Should handle SET_AUTH_PROGRESS', () => {
+    it('Should handle SET_AUTH_LOADING', () => {
         expect(
             authReducer(undefined, {
-                type: SET_AUTH_PROGRESS,
+                type: SET_AUTH_LOADING,
                 payload: true,
             }))
             .toEqual({
                 ...initialState,
-                isProgress: true,
+                isLoading: true,
             })
 
         expect(
             authReducer(undefined, {
-                type: SET_AUTH_PROGRESS,
+                type: SET_AUTH_LOADING,
                 payload: false,
             }))
             .toEqual({
                 ...initialState,
-                isProgress: false,
+                isLoading: false,
             })
     });
 

@@ -2,14 +2,14 @@ import mapReducer from '../../module/reducers/map-reducer';
 import {
     SET_ADDRESS_LIST,
     SET_ROUTE_COORDS,
-    SET_ADDRESS_PROGRESS,
+    SET_ADDRESS_LOADING,
 } from '../../common/constants/action-types';
 
 const initialState = {
     addressList: [],
     routeCoords: [],
     isFetched: false,
-    isProgress: false,
+    isLoading: false,
 };
 
 describe('Map Reducer', () => {
@@ -46,25 +46,25 @@ describe('Map Reducer', () => {
             })
     });
 
-    it('Should handle SET_ADDRESS_PROGRESS', () => {
+    it('Should handle SET_ADDRESS_LOADING', () => {
         expect(
             mapReducer(undefined, {
-                type: SET_ADDRESS_PROGRESS,
+                type: SET_ADDRESS_LOADING,
                 payload: true,
             }))
             .toEqual({
                 ...initialState,
-                isProgress: true,
+                isLoading: true,
             })
 
         expect(
             mapReducer(undefined, {
-                type: SET_ADDRESS_PROGRESS,
+                type: SET_ADDRESS_LOADING,
                 payload: false,
             }))
             .toEqual({
                 ...initialState,
-                isProgress: false,
+                isLoading: false,
             })
     });
 });

@@ -1,7 +1,7 @@
 import {
     SET_ADDRESS,
     SET_ADDRESS_LIST,
-    SET_ADDRESS_PROGRESS,
+    SET_ADDRESS_LOADING,
     SET_ROUTE,
     SET_ROUTE_COORDS
 } from '../../common/constants/action-types';
@@ -15,9 +15,9 @@ export const setAddressList = (addressList) => ({
     payload: addressList,
 });
 
-export const setAddressProgress = (isProgress) => ({
-    type: SET_ADDRESS_PROGRESS,
-    payload: isProgress,
+export const setAddressLoading = (isLoading) => ({
+    type: SET_ADDRESS_LOADING,
+    payload: isLoading,
 });
 
 export const setRoute = (addressFrom, addressTo) => ({
