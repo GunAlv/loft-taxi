@@ -8,17 +8,16 @@ export function* setAddressSaga(action) {
         const { data, status } = yield call(fetchAddressList);
 
         if (status === 200) {
-            yield put(setAddressLoading(false));
             yield put(setAddressList(data.addresses));
         } else {
             console.error('Ошибка');
-            yield put(setAddressLoading(false));
         }
     } catch(error) {
         console.error(error);
-        yield put(setAddressLoading(false));
 
         throw new Error('Нет соединения с сервером!');
+    } finally {
+        yield put(setAddressLoading(false));
     }
 }
 

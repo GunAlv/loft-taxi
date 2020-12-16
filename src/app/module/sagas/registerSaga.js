@@ -8,9 +8,8 @@ import { setRegisterError } from '../actions/register';
 
 export function* setRegisterSaga(action) {
     try {
+        yield put(setAuthLoading(true));
         const { data } = yield call(fetchRegister, action.payload);
-
-        yield put(setAuthLoading(false));
 
         if (data.success) {
             yield deletePaymentStorage();
@@ -30,9 +29,10 @@ export function* setRegisterSaga(action) {
         }
     } catch(error) {
         console.log(error);
-        yield put(setAuthLoading(false));
         yield put(setAuthStatus(false));
 
         throw new Error('Нет соединения с сервером!');
+    } finally {
+        yield put(setAuthLoading(false));
     }
 }

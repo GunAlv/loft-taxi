@@ -10,21 +10,20 @@ export function* setAuthSaga(action) {
         const { data } = yield call(fetchAuth, action.payload);
 
         if (data.success) {
-            yield put(setAuthLoading(false));
             yield setAuthStorage(true, data.token);
             yield put(setAuthStatus(true, data.token));
         } else {
             console.error(data.error);
-            yield put(setAuthLoading(false));
             yield put(setAuthStatus(false));
             yield put(setAuthError(data.error));
         }
     } catch (error) {
         console.error(error);
-        yield put(setAuthLoading(false));
         yield put(setAuthStatus(false));
 
         throw new Error('Нет соединения с сервером!');
+    } finally {
+        yield put(setAuthLoading(false));
     }
 }
 
