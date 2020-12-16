@@ -13,15 +13,12 @@ export function* setAuthSaga(action) {
             yield setAuthStorage(true, data.token);
             yield put(setAuthStatus(true, data.token));
         } else {
-            console.error(data.error);
-            yield put(setAuthStatus(false));
             yield put(setAuthError(data.error));
+            throw new Error('Ошибка авторизации');
         }
     } catch (error) {
         console.error(error);
         yield put(setAuthStatus(false));
-
-        throw new Error('Нет соединения с сервером!');
     } finally {
         yield put(setAuthLoading(false));
     }

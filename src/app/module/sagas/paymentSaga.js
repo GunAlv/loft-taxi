@@ -15,14 +15,11 @@ export function* pushPaymentSaga(action) {
                 isFilled: true,
             });
         } else {
-            console.error(data.error);
-            yield put(setPaymentStatus(false));
+            throw new Error();
         }
     } catch(error) {
         console.error(error);
         yield put(setPaymentStatus(false));
-
-        throw new Error('Нет соединения с сервером!');
     }
 }
 

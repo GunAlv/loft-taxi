@@ -10,12 +10,10 @@ export function* setAddressSaga(action) {
         if (status === 200) {
             yield put(setAddressList(data.addresses));
         } else {
-            console.error('Ошибка');
+            throw new Error();
         }
     } catch(error) {
         console.error(error);
-
-        throw new Error('Нет соединения с сервером!');
     } finally {
         yield put(setAddressLoading(false));
     }

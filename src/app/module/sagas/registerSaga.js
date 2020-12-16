@@ -23,15 +23,12 @@ export function* setRegisterSaga(action) {
             yield put(setRegisterError(''));
             yield put(setAuthStatus(true, data.token));
         } else {
-            console.error(data.error);
             yield put(setAuthStatus(false));
             yield put(setRegisterError(data.error));
+            throw new Error('Ошибка регистрации');
         }
     } catch(error) {
         console.log(error);
-        yield put(setAuthStatus(false));
-
-        throw new Error('Нет соединения с сервером!');
     } finally {
         yield put(setAuthLoading(false));
     }
