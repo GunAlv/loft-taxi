@@ -3,7 +3,7 @@ import MockAdapter from 'axios-mock-adapter';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { wrapTestToProvider } from '../../wrapTestToProviders';
-import MapForm from '../../components/map-form';
+import RouteSelect from '../../components/route-select';
 import { baseAPI } from '../../common/constants/baseAPI';
 
 const mock = new MockAdapter(axios);
@@ -30,17 +30,17 @@ describe('Форма заказа такси', () => {
         });
 
         render(
-            wrapTestToProvider(MapForm, history, props)
+            wrapTestToProvider(RouteSelect, history, props)
         );
     });
 
     it('Есть форма вызова такси', () => {
-       const mapForm = screen.getByTestId('map-form');
-       expect(mapForm).toBeInTheDocument();
+       const RouteSelect = screen.getByTestId('route-select');
+       expect(RouteSelect).toBeInTheDocument();
     });
 
     it('Кнопка сабмита заблокирована до выбора маршрута от/куда', () => {
-        const submitBtn = screen.getByTestId('map-form-button');
+        const submitBtn = screen.getByTestId('route-select-button');
         expect(submitBtn).toBeDisabled();
     });
 
@@ -53,7 +53,7 @@ describe('Форма заказа такси', () => {
     });
 
     it('Кнопка сабмита разблокируется после выбора маршрутов от/куда', () => {
-        const submitBtn = screen.getByTestId('map-form-button');
+        const submitBtn = screen.getByTestId('route-select-button');
         fireEvent.change(screen.getByTestId("select-from"), {
             target: { value: 'Эрмитаж' },
         });

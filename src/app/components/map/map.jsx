@@ -1,6 +1,6 @@
 import React from 'react';
 import { MapContainer } from './style';
-import MapForm from '../map-form';
+import RouteSelect from '../route-select';
 import MapBox from '../map-box';
 import mapboxgl from 'mapbox-gl';
 import mapData from '../../common/constants/map';
@@ -98,7 +98,7 @@ class Map extends React.Component {
     render() {
         return (
             <MapContainer>
-                <MapForm
+                <RouteSelect
                     drawRoute={this.drawRoute}
                 />
                 <MapBox ref={el => this.mapContainer = el} />

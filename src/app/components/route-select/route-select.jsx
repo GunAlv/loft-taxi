@@ -2,12 +2,12 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormContainer } from '../form/style';
-import { MapFormContainer, MapFormControl } from './style';
+import { RouteSelectContainer, RouteSelectControl } from './style';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import Button from '@material-ui/core/Button';
 import { setAddress, setRoute } from '../../module/actions/map';
 
-class MapForm extends React.Component {
+class RouteSelect extends React.Component {
     state = {
         addressFrom: '',
         addressTo: '',
@@ -40,13 +40,13 @@ class MapForm extends React.Component {
         const isDisabled = (!addressFrom.length || !addressTo.length);
 
         return (
-            <MapFormContainer
-                data-testid="map-form"
+            <RouteSelectContainer
+                data-testid="route-select"
             >
                 <FormContainer
                     onSubmit={this.submit}
                 >
-                    <MapFormControl>
+                    <RouteSelectControl>
                         <NativeSelect
                             value={addressFrom}
                             name="addressFrom"
@@ -73,8 +73,8 @@ class MapForm extends React.Component {
                                 </option>
                             ))}
                         </NativeSelect>
-                    </MapFormControl>
-                    <MapFormControl>
+                    </RouteSelectControl>
+                    <RouteSelectControl>
                         <NativeSelect
                             value={addressTo}
                             name="addressTo"
@@ -101,9 +101,9 @@ class MapForm extends React.Component {
                                 </option>
                             ))}
                         </NativeSelect>
-                    </MapFormControl>
+                    </RouteSelectControl>
                     <Button
-                        data-testid="map-form-button"
+                        data-testid="route-select-button"
                         variant="contained"
                         type="submit"
                         disabled={isDisabled}
@@ -111,7 +111,7 @@ class MapForm extends React.Component {
                         Заказать
                     </Button>
                 </FormContainer>
-            </MapFormContainer>
+            </RouteSelectContainer>
         );
     }
 }
@@ -126,4 +126,4 @@ export default compose(
             setRoute: (addressFrom, addressTo) => dispatch(setRoute(addressFrom, addressTo)),
         })),
     )
-)(MapForm);
+)(RouteSelect);

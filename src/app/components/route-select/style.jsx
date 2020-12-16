@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const MapFormContainer = styled.div`
+export const RouteSelectContainer = styled.div`
     background-color: ${p => p.theme.palette.primary.light};
     max-width: 486px;
     width: 100%;
@@ -11,7 +11,7 @@ export const MapFormContainer = styled.div`
     z-index: 10;
 `;
 
-export const MapFormControl = styled.div`
+export const RouteSelectControl = styled.div`
     position: relative;
     
     margin-bottom: 20px;
