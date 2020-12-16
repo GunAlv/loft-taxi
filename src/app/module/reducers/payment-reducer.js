@@ -36,7 +36,7 @@ const paymentReducer = (state = initialState, action) => {
             return {
                 ...state,
                 card: action.payload,
-                isFilled: checkProperties(action.payload),
+                isFilled: hasProperties(action.payload),
             }
 
         default:
@@ -44,7 +44,7 @@ const paymentReducer = (state = initialState, action) => {
     }
 };
 
-function checkProperties(obj) {
+function hasProperties(obj) {
     for (let key in obj) {
         if (obj[key] === '') return false;
     }
