@@ -7,6 +7,7 @@ export const FormAuthContainer = styled(FormContainer)`
 
 export const FormAuthRow = styled(FormRow)`
     margin-top: 20px;
+    flex-wrap: wrap;
     
     &:first-child {
         margin-top: 0;
