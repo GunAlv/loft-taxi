@@ -47,10 +47,11 @@ describe('registerSaga', () => {
         );
 
         expect(dispatched).toEqual([
-            setAuthLoading(false),
+            setAuthLoading(true),
             setPaymentData(emptyCard),
             setRegisterError(''),
             setAuthStatus(true, response.token),
+            setAuthLoading(false),
         ]);
     });
 
@@ -72,9 +73,10 @@ describe('registerSaga', () => {
         );
 
         expect(dispatched).toEqual([
-            setAuthLoading(false),
+            setAuthLoading(true),
             setAuthStatus(false),
             setRegisterError(response.error),
+            setAuthLoading(false),
         ]);
     });
 });

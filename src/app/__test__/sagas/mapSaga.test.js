@@ -37,8 +37,8 @@ describe('mapSaga', () => {
 
         expect(dispatched).toEqual([
             setAddressLoading(true),
-            setAddressLoading(false),
             setAddressList(response.addresses),
+            setAddressLoading(false),
         ]);
     });
 

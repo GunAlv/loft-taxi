@@ -38,8 +38,8 @@ describe('authSaga', () => {
 
        expect(dispatched).toEqual([
            setAuthLoading(true),
+           setAuthStatus(true, response.token),
            setAuthLoading(false),
-           setAuthStatus(true, response.token)
        ]);
    });
 
@@ -62,9 +62,9 @@ describe('authSaga', () => {
 
         expect(dispatched).toEqual([
             setAuthLoading(true),
-            setAuthLoading(false),
-            setAuthStatus(false),
             setAuthError(response.error),
+            setAuthStatus(false),
+            setAuthLoading(false),
         ]);
     });
 
