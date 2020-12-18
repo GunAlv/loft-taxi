@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Title } from '../title/style';
 import { FormBody, FormContainer, FormRow } from '../form/style';
 import { StyledTextField } from '../text-field/style';
 import { Button } from '@material-ui/core';
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import DateFnsUtils from '@date-io/date-fns';
+import { format } from 'date-fns'
+import moment from 'moment';
 import ProfileUpdateMessage from '../profile-update-message';
 import Card from '../card/card';
 import { ProfileAction, ProfileContainer, ProfileContent, ProfileDescription, ProfileIntro } from './style';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { pushPayment, paymentSuccessInfoDisable } from '../../module/actions/payment';
-
-const NUMBER_LIMIT = 19;
-const DATE_LIMIT = 5;
+import { Controller, useForm } from 'react-hook-form';
 
 const propTypes = {
     card: PropTypes.shape({
@@ -31,120 +33,111 @@ const defaultProps = {
     showSuccessInfo: false,
 };
 
-class Profile extends React.Component {
-    state = {
+function normalizeCardNumber(value) {
+    return value.replace(/\s/g, '').match(/.{1,4}/g)?.join(' ').substr(0, 19) || '';
+}
+
+const Profile = ({ card, token, showSuccessInfo, pushPayment, paymentSuccessInfoDisable }) => {
+    const [state, setState] = useState({
         cardNumber: '',
-        cardName: '',
         expiryDate: '',
-        cvc: '',
+        formattedDate: '',
+    });
+
+    const modifiedDate = card.expiryDate.length > 0 ? moment(card.expiryDate, "MM/YY").toString() : '';
+
+    useEffect(() => {
+        setValue('payment-name', card.cardName, { shouldValidate: true });
+        setValue('payment-number', card.cardNumber, { shouldValidate: true });
+        setValue('payment-cvc', card.cvc, { shouldValidate: true });
+        setValue('payment-date', modifiedDate, { shouldValidate: true });
+
+        setState(prevState => ({
+            ...prevState,
+            cardNumber: card.cardNumber,
+            expiryDate: modifiedDate,
+            formattedDate: card.expiryDate,
+        }));
+    }, []);
+
+    const methods = useForm({
+        mode: 'onChange',
+    });
+
+    const { handleSubmit, register, control, setValue, formState } = methods;
+
+    const submit = (data) => {
+        const cardName = data['payment-name'];
+        const expiryDate = data['payment-date'];
+        const cardNumber = data['payment-number'];
+        const cvc = data['payment-cvc'];
+
+        pushPayment(cardNumber, expiryDate, cardName, cvc, token);
     };
 
-    componentDidMount() {
-        const { card } = this.props;
-
-        this.setState({ ...card })
-    }
-
-    submit = (e) => {
-        const { token, pushPayment } = this.props;
-
-        e.preventDefault();
-
-        const cardName = e.target['payment-name'].value;
-        const expiryDate = e.target['payment-date'].value;
-        const cardNumber = e.target['payment-number'].value;
-        const cvc = e.target['payment-cvc'].value;
-
-        if (
-            cardNumber.length &&
-            expiryDate.length &&
-            cardNumber.length &&
-            cvc.length
-        ) {
-            pushPayment(cardNumber, expiryDate, cardName, cvc, token);
-        }
+    const onNameChange = (e) => {
+        e.target.value = e.target.value.replace(/[0-9]/g, '');
     };
 
-    changeName = (e) => {
-        this.setState({
-            cardName: e.target.value
-        });
+    const onNumberChange = (e) => {
+        e.target.value = normalizeCardNumber(e.target.value);
+
+        setState(prevState => ({
+            ...prevState,
+            cardNumber: e.target.value,
+        }));
     };
 
-    changeNumber = (e) => {
-        if (e.target.value.length <= NUMBER_LIMIT) {
-            this.setState({
-                cardNumber: e.target.value.replace(/[^\dA-Z]/g, '').replace(/(.{4})/g, '$1 ').trim(),
-            });
-        }
+    const onDateChange = (date, formattedDate) => {
+        setState(prevState => ({
+            ...prevState,
+            expiryDate: date.toString(),
+            formattedDate,
+        }));
     };
 
-    changeDate = (e) => {
-        let modifiedValue = e.target.value;
-
-        if (modifiedValue.length <= DATE_LIMIT) {
-            if (modifiedValue.length === 2) {
-                modifiedValue += '/';
-            }
-
-            this.setState({
-                expiryDate: modifiedValue,
-            });
-        }
+    const onCvcChange = (e) => {
+        e.target.value = e.target.value.replace(/[^0-9.]/g, '');
     };
 
-    changeCVC = (e) => {
-        if (e.target.value.length <= 3) {
-            this.setState({
-                cvc: e.target.value,
-            });
-        }
-    };
+    return (
+        <ProfileContainer
+            data-testid="profile"
+        >
+            <ProfileContent>
+                {
+                    showSuccessInfo ? (
+                        <ProfileUpdateMessage
+                            removeSuccessInfo={paymentSuccessInfoDisable}
+                        />
+                    ) : (
+                        <>
+                            <ProfileIntro>
+                                <Title variant="h1" component="h1">
+                                    Профиль
+                                </Title>
+                                <ProfileDescription>
+                                    Введите платежные данные
+                                </ProfileDescription>
+                            </ProfileIntro>
 
-    removeSuccessInfo = () => {
-        const { paymentSuccessInfoDisable } = this.props;
-        paymentSuccessInfoDisable();
-    };
-
-    render() {
-        const { cardName, cardNumber, expiryDate, cvc } = this.state;
-        const { showSuccessInfo } = this.props;
-
-        return (
-            <ProfileContainer
-                data-testid="profile"
-            >
-                <ProfileContent>
-                    {
-                        showSuccessInfo ? (
-                            <ProfileUpdateMessage
-                                removeSuccessInfo={this.removeSuccessInfo}
-                            />
-                        ) : (
-                            <>
-                                <ProfileIntro>
-                                    <Title variant="h1" component="h1">
-                                        Профиль
-                                    </Title>
-                                    <ProfileDescription>
-                                        Введите платежные данные
-                                    </ProfileDescription>
-                                </ProfileIntro>
-
+                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                 <FormContainer
                                     data-testid="profile-form"
-                                    onSubmit={this.submit}
+                                    onSubmit={handleSubmit(submit)}
                                 >
                                     <FormBody>
                                         <div>
                                             <FormRow>
                                                 <StyledTextField
                                                     type="text"
+                                                    label="Имя владельца"
                                                     name="payment-name"
                                                     id="payment-name"
-                                                    label="Имя владельца"
-                                                    value={cardName}
-                                                    onChange={this.changeName}
+                                                    inputRef={register({
+                                                        required: true,
+                                                    })}
+                                                    onChange={onNameChange}
                                                 />
                                             </FormRow>
                                             <FormRow>
@@ -153,52 +146,78 @@ class Profile extends React.Component {
                                                     name="payment-number"
                                                     id="payment-number"
                                                     label="Номер карты"
-                                                    value={cardNumber}
-                                                    onChange={this.changeNumber}
+                                                    defaultValue={state.cardNumber}
+                                                    inputRef={register({
+                                                        required: true,
+                                                    })}
+                                                    onChange={onNumberChange}
                                                 />
                                             </FormRow>
                                             <FormRow>
-                                                <StyledTextField
-                                                    type="text"
+                                                <Controller
+                                                    control={control}
                                                     name="payment-date"
                                                     id="payment-date"
-                                                    label="MM/YY"
-                                                    value={expiryDate}
-                                                    onChange={this.changeDate}
+                                                    rules={{ required: true }}
+                                                    render={({ onChange }) => (
+                                                        <DatePicker
+                                                            autoOk={true}
+                                                            variant="inline"
+                                                            format="MM/yy"
+                                                            value={state.expiryDate.length > 0 ? state.expiryDate : null}
+                                                            label="MM/YY"
+                                                            views={["month", "year"]}
+                                                            onChange={(date) => {
+                                                                const formattedDate = format(date, 'MM/yy');
+                                                                onChange(formattedDate);
+                                                                onDateChange(date, formattedDate);
+                                                            }}
+                                                            error={false}
+                                                            helperText={null}
+                                                        />
+                                                    )}
                                                 />
                                                 <StyledTextField
                                                     type="text"
                                                     name="payment-cvc"
                                                     id="payment-cvc"
                                                     label="CVC"
-                                                    value={cvc}
-                                                    onChange={this.changeCVC}
+                                                    inputRef={register({
+                                                        required: true,
+                                                    })}
+                                                    InputProps={{
+                                                        inputProps: {
+                                                            maxLength: 3,
+                                                        }
+                                                    }}
+                                                    onChange={onCvcChange}
                                                 />
                                             </FormRow>
                                         </div>
 
                                         <Card
-                                            number={cardNumber}
-                                            date={expiryDate}
+                                            number={state.cardNumber}
+                                            date={state.formattedDate}
                                         />
 
                                         <ProfileAction>
                                             <Button
                                                 variant="contained"
                                                 type="submit"
+                                                disabled={!formState.isValid}
                                             >
                                                 Сохранить
                                             </Button>
                                         </ProfileAction>
                                     </FormBody>
                                 </FormContainer>
-                            </>
-                        )
-                    }
-                </ProfileContent>
-            </ProfileContainer>
-        );
-    }
+                            </MuiPickersUtilsProvider>
+                        </>
+                    )
+                }
+            </ProfileContent>
+        </ProfileContainer>
+    );
 }
 
 Profile.propTypes = propTypes;
