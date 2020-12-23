@@ -1,6 +1,6 @@
 import {
     SET_AUTH,
-    SET_AUTH_PROGRESS,
+    SET_AUTH_LOADING,
     SET_AUTH_STATUS,
     SET_AUTH_ERROR,
     REMOVE_AUTH,
@@ -14,9 +14,9 @@ export const setAuth = (email, password) => ({
     },
 });
 
-export const setAuthProgress = (isProgress) => ({
-    type: SET_AUTH_PROGRESS,
-    payload: isProgress,
+export const setAuthLoading = (isLoading) => ({
+    type: SET_AUTH_LOADING,
+    payload: isLoading,
 });
 
 export const setAuthStatus = (isLoggedIn, token) => ({

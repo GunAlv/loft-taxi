@@ -16,6 +16,7 @@ const initialState = {
     },
     isFetched: false,
     showSuccessInfo: false,
+    isFilled: getFromPaymentStorage('isFilled') || false,
 };
 
 describe('Payment Reducer', () => {
@@ -81,6 +82,7 @@ describe('Payment Reducer', () => {
                     expiryDate: '12/23',
                     cvc: '111',
                 },
+                isFilled: true,
             })
     });
 

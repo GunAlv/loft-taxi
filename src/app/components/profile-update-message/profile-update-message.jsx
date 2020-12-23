@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ProfileAction, ProfileDescription, ProfileIntro } from '../profile/style';
 import Button from '@material-ui/core/Button';
+import { Link as RouteLink } from 'react-router-dom';
 import { Title } from '../title/style';
 
 const propTypes = {
@@ -21,6 +22,8 @@ const ProfileUpdateMessage = ({ removeSuccessInfo }) => (
 
         <ProfileAction>
             <Button
+                component={RouteLink}
+                to="/about"
                 variant="contained"
                 onClick={removeSuccessInfo}
             >

@@ -14,6 +14,7 @@ const initialState = {
     },
     isFetched: false,
     showSuccessInfo: false,
+    isFilled: getFromPaymentStorage('isFilled') || false,
 };
 
 const paymentReducer = (state = initialState, action) => {
@@ -35,11 +36,20 @@ const paymentReducer = (state = initialState, action) => {
             return {
                 ...state,
                 card: action.payload,
+                isFilled: hasProperties(action.payload),
             }
 
         default:
             return state;
     }
 };
+
+function hasProperties(obj) {
+    for (let key in obj) {
+        if (obj[key] === '') return false;
+    }
+
+    return true;
+}
 
 export default paymentReducer;
