@@ -1,6 +1,6 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import LoginForm from '../../components/login-form';
 import { baseAPI } from '../../common/constants/baseAPI';
 import { waitFor } from '@testing-library/dom';
@@ -20,10 +20,10 @@ describe('Форма логина', () => {
         onChangeForm: jest.fn(),
     };
 
-    beforeEach(() => {
-        render(
-            wrapTestToProvider(LoginForm, history, props)
-        );
+    beforeEach(async () => {
+        await act(async () => {
+           render(wrapTestToProvider(LoginForm, history, props));
+        });
     });
 
     it('Форма рендерится', () => {
@@ -39,6 +39,8 @@ describe('Форма логина', () => {
 
     it('При неуспешном сабмите формы появляется сообщение об ошибке',  async () => {
         const loginForm = screen.getByTestId('login-form');
+        const loginFormEmail = screen.getByTestId('login-form-email');
+        const loginFormPassword = screen.getByTestId('login-form-password');
 
         mock.onPost(`${baseAPI}auth`).reply(function (config) {
             return new Promise(function (resolve) {
@@ -49,12 +51,19 @@ describe('Форма логина', () => {
             });
         });
 
-        fireEvent.submit(loginForm, {
+        fireEvent.input(loginFormEmail, {
             target: {
-                'login-email': { value: loginFormData.email },
-                'login-password': { value: loginFormData.password }
+                value: loginFormData.email
             }
         });
+
+        fireEvent.input(loginFormPassword, {
+            target: {
+                value: loginFormData.password
+            }
+        });
+
+        fireEvent.submit(loginForm);
 
         await waitFor(() => {
             expect(screen.getByTestId('login-error')).toBeInTheDocument()
@@ -63,6 +72,8 @@ describe('Форма логина', () => {
 
     it('При успешном сабмите формы редиректит на страницу карты',  async () => {
         const loginForm = screen.getByTestId('login-form');
+        const loginFormEmail = screen.getByTestId('login-form-email');
+        const loginFormPassword = screen.getByTestId('login-form-password');
 
         mock.onPost(`${baseAPI}auth`).reply(function (config) {
             return new Promise(function (resolve) {
@@ -73,12 +84,19 @@ describe('Форма логина', () => {
             });
         });
 
-        fireEvent.submit(loginForm, {
+        fireEvent.input(loginFormEmail, {
             target: {
-                'login-email': { value: loginFormData.email },
-                'login-password': { value: loginFormData.password }
+                value: loginFormData.email
             }
         });
+
+        fireEvent.input(loginFormPassword, {
+            target: {
+                value: loginFormData.password
+            }
+        });
+
+        fireEvent.submit(loginForm);
         history.push('/map');
 
         await waitFor(() => {

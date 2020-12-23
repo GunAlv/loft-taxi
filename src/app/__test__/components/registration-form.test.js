@@ -1,6 +1,6 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import RegistrationForm from '../../components/registration-form';
 import { baseAPI } from '../../common/constants/baseAPI';
 import { waitFor } from '@testing-library/dom';
@@ -11,9 +11,24 @@ const mock = new MockAdapter(axios);
 
 const registrationFormData = {
     email: 'user@mail.ru',
-    name: 'Константин',
-    surname: 'Константинович',
+    name: 'John',
+    surname: 'Dou',
     password: 'test',
+};
+
+const fillForm = () => {
+    const registrationForm = screen.getByTestId('registration-form');
+    const registrationFormEmail = screen.getByTestId('registration-form-email');
+    const registrationFormName = screen.getByTestId('registration-form-name');
+    const registrationFormSurname = screen.getByTestId('registration-form-surname');
+    const registrationFormPassword = screen.getByTestId('registration-form-password');
+
+    fireEvent.input(registrationFormEmail, { target: { value: registrationFormData.email } });
+    fireEvent.input(registrationFormName, { target: { value: registrationFormData.name } });
+    fireEvent.input(registrationFormSurname, { target: { value: registrationFormData.surname } });
+    fireEvent.input(registrationFormPassword, { target: { value: registrationFormData.password } });
+
+    fireEvent.submit(registrationForm);
 };
 
 describe('Форма регистрации', () => {
@@ -22,10 +37,10 @@ describe('Форма регистрации', () => {
         onChangeForm: jest.fn(),
     };
 
-    beforeEach(() => {
-        render(
-            wrapTestToProvider(RegistrationForm, history, props)
-        );
+    beforeEach(async () => {
+        await act(async () => {
+            render(wrapTestToProvider(RegistrationForm, history, props));
+        });
     });
 
     it('Форма рендерится', () => {
@@ -40,8 +55,6 @@ describe('Форма регистрации', () => {
     });
 
     it('При неуспешном сабмите формы появляется сообщение об ошибке',  async () => {
-        const registrationForm = screen.getByTestId('registration-form');
-
         mock.onPost(`${baseAPI}register`).reply(function (config) {
             return new Promise(function (resolve) {
                 resolve([200, {
@@ -51,14 +64,7 @@ describe('Форма регистрации', () => {
             });
         });
 
-        fireEvent.submit(registrationForm, {
-            target: {
-                'registration-email': { value: registrationFormData.email },
-                'registration-password': { value: registrationFormData.password },
-                'registration-name': { value: registrationFormData.name },
-                'registration-surname': { value: registrationFormData.surname }
-            }
-        });
+        fillForm();
 
         await waitFor(() => {
             expect(screen.getByTestId('registration-error')).toBeInTheDocument()
@@ -66,8 +72,6 @@ describe('Форма регистрации', () => {
     });
 
     it('При успешном сабмите формы редиректит на страницу карты',  async () => {
-        const registrationForm = screen.getByTestId('registration-form');
-
         mock.onPost(`${baseAPI}register`).reply(function (config) {
             return new Promise(function (resolve) {
                 resolve([200, {
@@ -77,14 +81,7 @@ describe('Форма регистрации', () => {
             });
         });
 
-        fireEvent.submit(registrationForm, {
-            target: {
-                'registration-email': { value: registrationFormData.email },
-                'registration-password': { value: registrationFormData.password },
-                'registration-name': { value: registrationFormData.name },
-                'registration-surname': { value: registrationFormData.surname }
-            }
-        });
+        fillForm();
         history.push('/map');
 
         await waitFor(() => {

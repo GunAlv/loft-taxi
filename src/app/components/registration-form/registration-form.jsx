@@ -76,6 +76,9 @@ const RegistrationForm = ({ onChangeForm, setRegister, registerError }) => {
                             if (!isEmailValid(value)) return 'Неверный формат email';
                         },
                     })}
+                    inputProps={{
+                        'data-testid': "registration-form-email"
+                    }}
                     onBlur={onEmailBlur}
                     onChange={onEmailChange}
                 />
@@ -99,6 +102,9 @@ const RegistrationForm = ({ onChangeForm, setRegister, registerError }) => {
                             if (!isOnlyLetters(val)) return 'Имя не должно содержать цифры';
                         }
                     })}
+                    inputProps={{
+                        'data-testid': "registration-form-name"
+                    }}
                     onBlur={onNameBlur}
                     onChange={onNameChange}
                 />
@@ -122,6 +128,9 @@ const RegistrationForm = ({ onChangeForm, setRegister, registerError }) => {
                             if (!isOnlyLetters(val)) return 'Фамилия не должна содержать цифры';
                         }
                     })}
+                    inputProps={{
+                        'data-testid': "registration-form-surname"
+                    }}
                     onBlur={onSurnameBlur}
                     onChange={onSurnameChange}
                 />
@@ -143,6 +152,9 @@ const RegistrationForm = ({ onChangeForm, setRegister, registerError }) => {
                         required: true,
                         minLength: PASSWORD_MIN_LENGTH,
                     })}
+                    inputProps={{
+                        'data-testid': "registration-form-password"
+                    }}
                     onBlur={onPasswordBlur}
                     onChange={onPasswordChange}
                 />

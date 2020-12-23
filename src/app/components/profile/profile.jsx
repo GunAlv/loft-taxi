@@ -137,6 +137,9 @@ const Profile = ({ card, token, showSuccessInfo, pushPayment, paymentSuccessInfo
                                                     inputRef={register({
                                                         required: true,
                                                     })}
+                                                    inputProps={{
+                                                        'data-testid': "profile-form-name"
+                                                    }}
                                                     onChange={onNameChange}
                                                 />
                                             </FormRow>
@@ -150,6 +153,9 @@ const Profile = ({ card, token, showSuccessInfo, pushPayment, paymentSuccessInfo
                                                     inputRef={register({
                                                         required: true,
                                                     })}
+                                                    inputProps={{
+                                                        'data-testid': "profile-form-number"
+                                                    }}
                                                     onChange={onNumberChange}
                                                 />
                                             </FormRow>
@@ -172,6 +178,9 @@ const Profile = ({ card, token, showSuccessInfo, pushPayment, paymentSuccessInfo
                                                                 onChange(formattedDate);
                                                                 onDateChange(date, formattedDate);
                                                             }}
+                                                            inputProps={{
+                                                                'data-testid': "profile-form-date"
+                                                            }}
                                                             error={false}
                                                             helperText={null}
                                                         />
@@ -187,6 +196,7 @@ const Profile = ({ card, token, showSuccessInfo, pushPayment, paymentSuccessInfo
                                                     })}
                                                     InputProps={{
                                                         inputProps: {
+                                                            'data-testid': "profile-form-cvc",
                                                             maxLength: 3,
                                                         }
                                                     }}

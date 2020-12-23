@@ -10,7 +10,7 @@ const propTypes = {
 };
 
 const ProfileUpdateMessage = ({ removeSuccessInfo }) => (
-    <>
+    <div data-testid="profile-update-message">
         <ProfileIntro>
             <Title variant="h1" component="h1">
                 Профиль
@@ -30,7 +30,7 @@ const ProfileUpdateMessage = ({ removeSuccessInfo }) => (
                 Перейти на карту
             </Button>
         </ProfileAction>
-    </>
+    </div>
 );
 
 ProfileUpdateMessage.propTypes = propTypes;

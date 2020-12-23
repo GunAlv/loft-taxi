@@ -64,6 +64,9 @@ const LoginForm = ({ onChangeForm, setAuth, authError }) => {
                             if (!isEmailValid(value)) return 'Неверный формат email';
                         },
                     })}
+                    inputProps={{
+                        'data-testid': "login-form-email"
+                    }}
                     onBlur={onEmailBlur}
                     onChange={onEmailChange}
                 />
@@ -84,6 +87,9 @@ const LoginForm = ({ onChangeForm, setAuth, authError }) => {
                     inputRef={register({
                         required: true,
                     })}
+                    inputProps={{
+                        'data-testid': "login-form-password"
+                    }}
                     onBlur={onPasswordBlur}
                     onChange={onPasswordChange}
                 />
