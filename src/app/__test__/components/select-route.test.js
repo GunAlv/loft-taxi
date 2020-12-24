@@ -1,6 +1,6 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { wrapTestToProvider } from '../../wrapTestToProviders';
 import RouteSelect from '../../components/route-select';
@@ -12,7 +12,7 @@ describe('Форма заказа такси', () => {
     let history = createMemoryHistory();
     let props = {};
 
-    beforeEach(() => {
+    beforeEach(async () => {
         const response = {
             status: 200,
             addresses: [
@@ -29,14 +29,14 @@ describe('Форма заказа такси', () => {
             });
         });
 
-        render(
-            wrapTestToProvider(RouteSelect, history, props)
-        );
+        await act(async () => {
+            render(wrapTestToProvider(RouteSelect, history, props));
+        });
     });
 
     it('Есть форма вызова такси', () => {
-       const RouteSelect = screen.getByTestId('route-select');
-       expect(RouteSelect).toBeInTheDocument();
+       const routeSelect = screen.getByTestId('route-select');
+       expect(routeSelect).toBeInTheDocument();
     });
 
     it('Кнопка сабмита заблокирована до выбора маршрута от/куда', () => {
@@ -44,22 +44,29 @@ describe('Форма заказа такси', () => {
         expect(submitBtn).toBeDisabled();
     });
 
-    it('Выбора маршрута в одном селекте блокирует его в другом', () => {
-        fireEvent.change(screen.getByTestId("select-from"), {
-            target: { value: 'Эрмитаж' },
+    it('Выбора маршрута в одном селекте блокирует его в другом', async () => {
+        await act(async () => {
+            fireEvent.change(screen.getByTestId("select-from"), {
+                target: { value: 'Эрмитаж' },
+            });
         });
         const optionsTo = screen.getAllByTestId('select-option-to');
         expect(optionsTo[1]).toBeDisabled();
     });
 
-    it('Кнопка сабмита разблокируется после выбора маршрутов от/куда', () => {
+    it('Кнопка сабмита разблокируется после выбора маршрутов от/куда', async () => {
         const submitBtn = screen.getByTestId('route-select-button');
-        fireEvent.change(screen.getByTestId("select-from"), {
-            target: { value: 'Эрмитаж' },
+        await act(async () => {
+            fireEvent.change(screen.getByTestId("select-from"), {
+                target: { value: 'Эрмитаж' },
+            });
         });
-        fireEvent.change(screen.getByTestId("select-to"), {
-            target: { value: 'Кинотеатр Аврора' },
+        await act(async () => {
+            fireEvent.change(screen.getByTestId("select-to"), {
+                target: { value: 'Кинотеатр Аврора' },
+            });
         });
+
         expect(submitBtn).not.toBeDisabled();
     });
-})
+});
