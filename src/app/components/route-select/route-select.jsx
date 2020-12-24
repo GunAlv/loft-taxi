@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormContainer } from '../form/style';
@@ -8,33 +9,20 @@ import Button from '@material-ui/core/Button';
 import { setAddress, setRoute } from '../../module/actions/map';
 import { Controller, useForm } from 'react-hook-form';
 
-const RouteSelect = ({ setAddress, addressList, setRoute }) => {
-    const [state, setState] = useState({
-        addressFrom: '',
-        addressTo: '',
-    });
+const propTypes = {
+    setAddress: PropTypes.func.isRequired,
+    addressList: PropTypes.array.isRequired,
+    setRoute: PropTypes.func.isRequired,
+};
 
-    const { handleSubmit, control, formState } = useForm({
+const RouteSelect = ({ setAddress, addressList, setRoute }) => {
+    const { handleSubmit, control, formState, getValues } = useForm({
         mode: 'onChange',
     });
 
     useEffect(() => {
         setAddress();
     }, []);
-
-    const handleChangeFrom = (event) => {
-        setState(prevState => ({
-            ...prevState,
-            addressFrom: event.target.value,
-        }));
-    };
-
-    const handleChangeTo = (event) => {
-        setState(prevState => ({
-            ...prevState,
-            addressTo: event.target.value,
-        }));
-    }
 
     const submit = (data) => {
         setRoute(data.addressFrom, data.addressTo);
@@ -52,19 +40,14 @@ const RouteSelect = ({ setAddress, addressList, setRoute }) => {
                         rules={{ required: true }}
                         render={({ onChange }) => (
                             <NativeSelect
-                                value={state.addressFrom}
                                 inputProps={{
                                     'aria-label': 'addressFrom',
                                     'data-testid': 'select-from',
                                 }}
-                                onChange={(e) => {
-                                    onChange(e);
-                                    handleChangeFrom(e);
-                                }}
+                                onChange={onChange}
                             >
                                 <option
                                     value=""
-                                    disabled
                                 >
                                     Откуда
                                 </option>
@@ -73,7 +56,7 @@ const RouteSelect = ({ setAddress, addressList, setRoute }) => {
                                         data-testid="select-option-from"
                                         key={address}
                                         value={address}
-                                        disabled={address === state.addressTo}
+                                        disabled={address === getValues('addressTo')}
                                     >
                                         {address}
                                     </option>
@@ -89,20 +72,14 @@ const RouteSelect = ({ setAddress, addressList, setRoute }) => {
                         rules={{ required: true }}
                         render={({ onChange }) => (
                             <NativeSelect
-                                value={state.addressTo}
-                                name="addressTo"
                                 inputProps={{
                                     'aria-label': 'addressTo',
                                     'data-testid': 'select-to',
                                 }}
-                                onChange={(e) => {
-                                    onChange(e);
-                                    handleChangeTo(e);
-                                }}
+                                onChange={onChange}
                             >
                                 <option
                                     value=""
-                                    disabled
                                 >
                                     Куда
                                 </option>
@@ -111,7 +88,7 @@ const RouteSelect = ({ setAddress, addressList, setRoute }) => {
                                         data-testid="select-option-to"
                                         key={address}
                                         value={address}
-                                        disabled={address === state.addressFrom}
+                                        disabled={address === getValues('addressFrom')}
                                     >
                                         {address}
                                     </option>
@@ -132,6 +109,8 @@ const RouteSelect = ({ setAddress, addressList, setRoute }) => {
         </RouteSelectContainer>
     );
 }
+
+RouteSelect.propTypes = propTypes;
 
 export default compose(
     connect(
