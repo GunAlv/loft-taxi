@@ -14,11 +14,9 @@ const RouteSelect = ({ setAddress, addressList, setRoute }) => {
         addressTo: '',
     });
 
-    const methods = useForm({
+    const { handleSubmit, control, formState } = useForm({
         mode: 'onChange',
     });
-
-    const { handleSubmit, control, formState } = methods;
 
     useEffect(() => {
         setAddress();

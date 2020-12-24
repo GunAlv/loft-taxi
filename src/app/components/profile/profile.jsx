@@ -60,11 +60,9 @@ const Profile = ({ card, token, showSuccessInfo, pushPayment, paymentSuccessInfo
         }));
     }, []);
 
-    const methods = useForm({
+    const { handleSubmit, register, control, setValue, formState } = useForm({
         mode: 'onChange',
     });
-
-    const { handleSubmit, register, control, setValue, formState } = methods;
 
     const submit = (data) => {
         const cardName = data['payment-name'];

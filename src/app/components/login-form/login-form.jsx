@@ -21,10 +21,9 @@ const LoginForm = ({ onChangeForm, setAuth, authError }) => {
     const [isEmailLostFocus, setEmailLostFocus] = useState(false);
     const [isPasswordLostFocus, setPasswordLostFocus] = useState(false);
 
-    const methods = useForm({
+    const { handleSubmit, register, errors, formState } = useForm({
         mode: 'onChange',
     });
-    const { handleSubmit, register, errors, formState } = methods;
 
     const submit = (data) => {
         const email = data['login-email'];

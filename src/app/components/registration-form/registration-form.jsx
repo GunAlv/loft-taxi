@@ -25,10 +25,9 @@ const RegistrationForm = ({ onChangeForm, setRegister, registerError }) => {
     const [isNameLostFocus, setNameLostFocus] = useState(false);
     const [isSurnameLostFocus, setSurnameLostFocus] = useState(false);
 
-    const methods = useForm({
+    const { handleSubmit, register, errors, formState } = useForm({
         mode: 'onChange',
     });
-    const { handleSubmit, register, errors, formState } = methods;
 
     const submit = (data) => {
         const email = data['registration-email'];
