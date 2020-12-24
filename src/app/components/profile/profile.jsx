@@ -6,8 +6,7 @@ import { StyledTextField } from '../text-field/style';
 import { Button } from '@material-ui/core';
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from '@date-io/date-fns';
-import { format } from 'date-fns'
-import moment from 'moment';
+import { format, parse } from 'date-fns'
 import ProfileUpdateMessage from '../profile-update-message';
 import Card from '../card/card';
 import { ProfileAction, ProfileContainer, ProfileContent, ProfileDescription, ProfileIntro } from './style';
@@ -44,7 +43,7 @@ const Profile = ({ card, token, showSuccessInfo, pushPayment, paymentSuccessInfo
         formattedDate: '',
     });
 
-    const modifiedDate = card.expiryDate.length > 0 ? moment(card.expiryDate, "MM/YY").toString() : '';
+    const modifiedDate = card.expiryDate.length > 0 ? parse(card.expiryDate, 'MM/yy', new Date()).toString() : '';
 
     useEffect(() => {
         setValue('payment-name', card.cardName, { shouldValidate: true });
